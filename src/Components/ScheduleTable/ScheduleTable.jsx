@@ -1,4 +1,6 @@
-import {TableSize} from './ScheduleTable.styled';
+import { TableSize } from './ScheduleTable.styled';
+import SignUp from 'Components/SignUp/SignUp';
+import { useState } from 'react';
 
 const ScheduleTable = ({ 
   data0800,
@@ -15,7 +17,9 @@ const ScheduleTable = ({
   data1900,
   data2000
 }) => {
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [dayTime, setDayTime] = useState('');
+  const [kind_trainee, setKind_trainee] = useState('');
   const NotFoundTrainee = ({ item }) => {
     if (item.kind_trainee === "-") {
       return null;
@@ -26,17 +30,33 @@ const ScheduleTable = ({
       </>
     )
   }
+
+  const onSignUp = (e) => {
+    if (isOpen === true) {
+      // return setIsOpen(false);
+    }
+    // setIsOpen(true);
+    setDayTime(e.target.id);
+    setKind_trainee(e.target.className);
+  }
   // console.log(data0800);
+  // console.log("kind_trainee ", kind_trainee);
+  // console.log("dayTime: ", dayTime);
   return (
     <>
       <tr className='time'>
+        {isOpen ? <SignUp/> : null}
         <td>8:00</td>
         {data0800.map(item => (
         <TableSize
           key={item.id}
           id={item.day}
           className={item.day}>
-          <button id={item.id} onClick={(e) => { console.log(e.target.id) }}>
+          {/* <button id={item.id} className={item.kind_trainee} onClick={(e) => { console.log(e.target.className) }}> */}
+            <button
+              id={item.id}
+              className={item.kind_trainee}
+              onClick={onSignUp}>
             {item.kind_trainee}
             <NotFoundTrainee
               item={item}

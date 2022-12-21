@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.292f0f71.css","mappings":"AAAA,EAGE,qBAAsB,CAFtB,QAAS,CACT,SAEF,CAEA,KACE,yCAA0C,CAC1C,gCACF","sources":["App.css"],"sourcesContent":["*{\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}\n\nbody{\n  background-color: var(--tg-theme-bg-color);\n  color: var(--tg-theme-text-color);\n}"],"names":[],"sourceRoot":""}

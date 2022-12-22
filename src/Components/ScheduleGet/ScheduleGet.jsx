@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import ScheduleTable from '../ScheduleTable/ScheduleTable';
-import {clientAPI} from '../../service/axios.config';
+import { clientAPI } from '../../service/axios.config';
+// import SignUp from 'Components/SignUp/SignUp';
 import {
   PositionTable, 
 } from './ScheduleGet.styled';
@@ -252,47 +253,61 @@ function ScheduleGet() {
       });
   },
    [setData0800]
-   );
+  );
+  // console.log(data0800)
+  const Waiting = () => {
+    if (data0800.length === 0) {
+      return (
+        <div>
+          <h2>Інформація завантажуєтсья</h2>
+        </div>
+      );
+    };
+    return (
+      <Table
+        striped
+        bordered
+        hover
+          size='xl'
+          className='table-back-color'
+      >
+        <thead >
+          <tr>
+            <th className='time'>#</th>
+            <th className='monday'>Понеділок</th>
+            <th className='tuesday'>Вівторок</th>
+            <th className='wednesday'>Середа</th>
+            <th className='thursday'>Четвер</th>
+            <th className='friday'>П'ятниця</th>
+            <th className='saturday'>Субота</th>
+            <th className='sunday'>Неділя</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ScheduleTable
+            data0800={data0800}
+            data0900={data0900}
+            data1000={data1000}
+            data1100={data1100}
+            data1200={data1200}
+            data1300={data1300}
+            data1400={data1400}
+            data1500={data1500}
+            data1600={data1600}
+            data1700={data1700}
+            data1800={data1800}
+            data1900={data1900}
+            data2000={data2000}
+          />
+        </tbody>
+      </Table>
+    )
+  };
 
   return (
     <PositionTable>
-    <Table
-      striped
-      bordered
-      hover
-        size='xl'
-        className='table-back-color'
-    >
-      <thead >
-        <tr>
-          <th className='time'>#</th>
-          <th className='monday'>Понеділок</th>
-          <th className='tuesday'>Вівторок</th>
-          <th className='wednesday'>Середа</th>
-          <th className='thursday'>Четвер</th>
-          <th className='friday'>П'ятниця</th>
-          <th className='saturday'>Субота</th>
-          <th className='sunday'>Неділя</th>
-        </tr>
-      </thead>
-        <tbody>
-        <ScheduleTable
-          data0800={data0800}
-          data0900={data0900}
-          data1000={data1000}
-          data1100={data1100}
-          data1200={data1200}
-          data1300={data1300}
-          data1400={data1400}
-          data1500={data1500}
-          data1600={data1600}
-          data1700={data1700}
-          data1800={data1800}
-          data1900={data1900}
-          data2000={data2000}
-        />
-      </tbody>
-      </Table>
+      <Waiting/>
+      {/* <SignUp/> */}
       {/* <ScheduleLink to='/'>Головне меню</ScheduleLink> */}
     </PositionTable>
   );

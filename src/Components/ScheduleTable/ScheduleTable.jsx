@@ -40,8 +40,8 @@ const ScheduleTable = ({
     setKind_trainee(e.target.className);
   }
   // console.log(data0800);
-  // console.log("kind_trainee ", kind_trainee);
-  // console.log("dayTime: ", dayTime);
+  console.log("kind_trainee ", kind_trainee);
+  console.log("dayTime: ", dayTime);
   return (
     <>
       <tr className='time'>

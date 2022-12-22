@@ -33,9 +33,9 @@ const ScheduleTable = ({
 
   const onSignUp = (e) => {
     if (isOpen === true) {
-      // return setIsOpen(false);
+      return setIsOpen(false);
     }
-    // setIsOpen(true);
+    setIsOpen(true);
     setDayTime(e.target.id);
     setKind_trainee(e.target.className);
   }

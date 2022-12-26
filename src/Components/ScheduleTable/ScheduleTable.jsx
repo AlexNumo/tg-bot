@@ -1,6 +1,6 @@
 import { TableSize } from './ScheduleTable.styled';
-// import SignUp from 'Components/SignUp/SignUp';
-// import { useState } from 'react';
+import { useState } from 'react';
+import SignUp from 'Components/SignUp/SignUp';
 
 const ScheduleTable = ({ 
   data0800,
@@ -15,34 +15,58 @@ const ScheduleTable = ({
   data1700,
   data1800,
   data1900,
-  data2000
+  data2000,
 }) => {
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [dayTime, setDayTime] = useState('');
-  // const [kind_trainee, setKind_trainee] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [kind_trainee, setKind_trainee] = useState('');
+  const [day, setDay] = useState('');
+  const [time, setTime] = useState('');
 
   const NotFoundTrainee = ({ item }) => {
     if (item.kind_trainee === "-") {
       return null;
     }
-    return(null
+    return (null
       // <>
       //   <span>, тренер "{item.name_Coach }"</span>
       // </>
     )
+  };
+
+  const Close = (e) => {
+    if (modalOpen === true) {
+      return [
+        setModalOpen(false),
+        setKind_trainee(''),
+        setDay(''),
+        setTime('')
+      ];
+    }
+    setModalOpen(true);
+    setKind_trainee(e.target.className);
+    setDay(e.nativeEvent.path[1].id);
+    setTime(e.nativeEvent.path[1].attributes[0].ownerElement.attributes.class.ownerElement.classList[2]);
+  };
+
+  console.log("day: ", day);
+  console.log("kind_trainee: ", kind_trainee);
+  console.log("time: ", time);
+
+
+  const BTN = ({ item }) => {
+    return (
+      <>
+        <button
+          key={item.id}
+          className={item.kind_trainee}
+          onClick={Close}
+        >
+          {item.kind_trainee}
+        </button>
+      </>
+    )
   }
 
-  // const onSignUp = (e) => {
-  //   if (isOpen === true) {
-  //     return setIsOpen(false);
-  //   }
-  //   setIsOpen(true);
-  //   setDayTime(e.target.id);
-  //   setKind_trainee(e.target.className);
-  // }
-  // // console.log(data0800);
-  // console.log("kind_trainee ", kind_trainee);
-  // console.log("dayTime: ", dayTime);
   return (
     <>
       <tr className='time'>
@@ -51,18 +75,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {/* <button id={item.id} className={item.kind_trainee} onClick={(e) => { console.log(e.target.className) }}> */}
-            <button
-              id={item.id}
-              className={item.kind_trainee}
-              // onClick={onSignUp}
-            >
-            {item.kind_trainee}
-            <NotFoundTrainee
-              item={item}
-            /> 
-          </button>
+          className={item.time}>
+          <BTN item={item} />
         </TableSize>
         ))}
       </tr>
@@ -72,8 +86,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -86,8 +100,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -100,8 +114,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -114,8 +128,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -128,8 +142,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -142,8 +156,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -156,8 +170,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -170,8 +184,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -184,8 +198,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -198,8 +212,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -212,8 +226,8 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
@@ -226,16 +240,24 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.day}>
-          {item.kind_trainee}
+          className={item.time}>
+          <BTN item={item} />
           <NotFoundTrainee
             item={item}
           />
         </TableSize>
         ))}
       </tr>
+      {modalOpen ?
+        <SignUp
+          Close={Close}
+          kind_trainee={kind_trainee}
+          day={day}
+          time={time}
+        />
+        :
+        null}
     </>
   )
 }
-
 export default ScheduleTable;

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import ScheduleTable from '../ScheduleTable/ScheduleTable';
 import { clientAPI } from '../../service/axios.config';
-// import SignUp from 'Components/SignUp/SignUp';
 import {
   PositionTable, 
 } from './ScheduleGet.styled';
@@ -22,7 +21,6 @@ function ScheduleGet() {
   const [data1800, setData1800] = useState([]);
   const [data1900, setData1900] = useState([]);
   const [data2000, setData2000] = useState([]);
-
 
   useEffect(() => {
     clientAPI.getDataALL().then(
@@ -254,7 +252,7 @@ function ScheduleGet() {
   },
    [setData0800]
   );
-  // console.log(data0800)
+
   const Waiting = () => {
     if (data0800.length === 0) {
       return (
@@ -307,8 +305,6 @@ function ScheduleGet() {
   return (
     <PositionTable>
       <Waiting/>
-      {/* <SignUp/> */}
-      {/* <ScheduleLink to='/'>Головне меню</ScheduleLink> */}
     </PositionTable>
   );
 }

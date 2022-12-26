@@ -1,7 +1,9 @@
 import { Formik } from 'formik';
 import {
   Wrapper,
-  Dialog
+  Dialog,
+  KindStyle,
+  SubBTN
 } from './SignUp.styled';
 
 const SignUp = ({ Close, kind_trainee, day, time }) => {
@@ -9,91 +11,91 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
     if (time === "0800") {
       return (
         <>
-          <span>8:00</span>
+          <KindStyle>8:00</KindStyle>
         </>
       )
     };
     if (time === "0900") {
       return (
         <>
-          <span>9:00</span>
+          <KindStyle>9:00</KindStyle>
         </>
       )
     };
     if (time === "1000") {
       return (
         <>
-          <span>10:00</span>
+          <KindStyle>10:00</KindStyle>
         </>
       )
     };
     if (time === "1100") {
       return (
         <>
-          <span>11:00</span>
+          <KindStyle>11:00</KindStyle>
         </>
       )
     };
     if (time === "1200") {
       return (
         <>
-          <span>12:00</span>
+          <KindStyle>12:00</KindStyle>
         </>
       )
     };
     if (time === "1300") {
       return (
         <>
-          <span>13:00</span>
+          <KindStyle>13:00</KindStyle>
         </>
       )
     };
     if (time === "1400") {
       return (
         <>
-          <span>14:00</span>
+          <KindStyle>14:00</KindStyle>
         </>
       )
     };
     if (time === "1500") {
       return (
         <>
-          <span>15:00</span>
+          <KindStyle>15:00</KindStyle>
         </>
       )
     };
     if (time === "1600") {
       return (
         <>
-          <span>16:00</span>
+          <KindStyle>16:00</KindStyle>
         </>
       )
     };
     if (time === "1700") {
       return (
         <>
-          <span>17:00</span>
+          <KindStyle>17:00</KindStyle>
         </>
       )
     };
     if (time === "1800") {
       return (
         <>
-          <span>18:00</span>
+          <KindStyle>18:00</KindStyle>
         </>
       )
     };
     if (time === "1900") {
       return (
         <>
-          <span>19:00</span>
+          <KindStyle>19:00</KindStyle>
         </>
       )
     };
     if (time === "2000") {
       return (
         <>
-          <span>20:00</span>
+          <KindStyle>20:00</KindStyle>
         </>
       )
     };
@@ -109,7 +111,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       return (
         <>
           <TimeOfDay />
-          <span> у понеділок</span>
+          <KindStyle> у понеділок</KindStyle>
         </>
       )
     };
@@ -117,7 +119,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       return (
         <>
           <TimeOfDay />
-          <span> у вівторок</span>
+          <KindStyle> у вівторок</KindStyle>
         </>
       )
     };
@@ -125,7 +127,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       return (
         <>
           <TimeOfDay />
-          <span> у середу</span>
+          <KindStyle> у середу</KindStyle>
         </>
       )
     };
@@ -133,7 +135,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       return (
         <>
           <TimeOfDay />
-          <span> у четвер</span>
+          <KindStyle> у четвер</KindStyle>
         </>
       )
     };
@@ -141,7 +143,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       return (
         <>
           <TimeOfDay />
-          <span> у п'ятницю</span>
+          <KindStyle> у п'ятницю</KindStyle>
         </>
       )
     };
@@ -149,7 +151,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       return (
         <>
           <TimeOfDay />
-          <span> у середу</span>
+          <KindStyle> у середу</KindStyle>
         </>
       )
     };
@@ -157,7 +159,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       return (
         <>
           <TimeOfDay />
-          <span> у неділю</span>
+          <KindStyle> у неділю</KindStyle>
         </>
       )
     }
@@ -184,7 +186,8 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
     return (
       <>
         <Dialog>
-          <h3>Ви обрали {kind_trainee} на <DayOfWeek/></h3>
+          <h4>Ви обрали <KindStyle>{kind_trainee} на </KindStyle><DayOfWeek /></h4><br />
+          <h4>Будь ласка, введіть наступні дані</h4><br />
           <Formik
             initialValues={{
               id: "",
@@ -211,24 +214,30 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
                 <form
                   onSubmit={handleSubmit}
                 >
+                  <label htmlFor="name">
+                    Ваше ім'я
+                  </label><br/>
                   <input
                     id="name"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.value}
-                  />
+                  /><br/>
+                  <label htmlFor="name">
+                    Ваш номер телефону
+                  </label><br/>
                   <input
-                    id="tel_number"
+                    id="id"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.value}
-                  />
-                  <button type="submit" disabled={isSubmitting}>
-                    Записатися
-                  </button>
-                  <button type="button" onClick={Close}>
+                  /><br/>
+                  <SubBTN type="button" onClick={Close}>
                     Закрити
-                  </button>
+                  </SubBTN>
+                  <SubBTN type="submit" disabled={isSubmitting}>
+                    Записатися
+                  </SubBTN>
                 </form>
               );
             }}

@@ -23,5 +23,5 @@ const ScheduleLink = styled(NavLink)`
 
 export {
   PositionTable,
-  ScheduleLink
+  ScheduleLink,
 };

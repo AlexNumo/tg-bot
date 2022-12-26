@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import ScheduleTable from '../ScheduleTable/ScheduleTable';
 import { clientAPI } from '../../service/axios.config';
 import {
-  PositionTable, 
+  PositionTable,
 } from './ScheduleGet.styled';
 
 

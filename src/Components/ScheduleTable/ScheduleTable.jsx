@@ -1,4 +1,6 @@
-import { TableSize } from './ScheduleTable.styled';
+import {
+  TableSize,
+} from './ScheduleTable.styled';
 import { useState } from 'react';
 import SignUp from 'Components/SignUp/SignUp';
 
@@ -48,15 +50,13 @@ const ScheduleTable = ({
     setTime(e.nativeEvent.path[1].attributes[0].ownerElement.attributes.class.ownerElement.classList[2]);
   };
 
-  console.log("day: ", day);
-  console.log("kind_trainee: ", kind_trainee);
-  console.log("time: ", time);
-
-
   const BTN = ({ item }) => {
+    // if (item.kind_trainee === "-") {
+    //   return (null)
+    // }
     return (
       <>
-        <button
+        <button style={{width: '80px'}}
           key={item.id}
           className={item.kind_trainee}
           onClick={Close}

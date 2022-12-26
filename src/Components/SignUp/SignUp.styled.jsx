@@ -30,7 +30,6 @@ const SubBTN = styled.button`
   border-radius: 5px;
 `;
 
-
 export {
   Wrapper,
   Dialog,

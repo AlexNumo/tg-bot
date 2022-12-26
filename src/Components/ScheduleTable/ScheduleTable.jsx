@@ -46,8 +46,8 @@ const ScheduleTable = ({
     }
     setModalOpen(true);
     setKind_trainee(e.target.className);
-    setDay(e.nativeEvent.path[1].id);
-    setTime(e.nativeEvent.path[1].attributes[0].ownerElement.attributes.class.ownerElement.classList[2]);
+    setDay(e.target.id);
+    setTime(e.target.name);
   };
 
   const BTN = ({ item }) => {
@@ -58,6 +58,8 @@ const ScheduleTable = ({
       <>
         <button style={{width: '80px'}}
           key={item.id}
+          id={item.day}
+          name={item.time}
           className={item.kind_trainee}
           onClick={Close}
         >

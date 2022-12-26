@@ -1,12 +1,10 @@
 import { Formik } from 'formik';
-import { useState } from 'react';
 import {
   Wrapper,
   Dialog
 } from './SignUp.styled';
 
 const SignUp = ({ Close, kind_trainee, day, time }) => {
-  const [name, setName] = useState('');
   const TimeOfDay = () => {
     if (time === "0800") {
       return (
@@ -170,14 +168,6 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
     );
   };
 
-  const HandleChacgeName = (e) => {
-    return (
-      setName(e.target.value)
-    )
-  };
-
-  console.log("name: ", name)
-
   const CheckKindTrainee = () => {
     if (kind_trainee === "-") {
       return (
@@ -197,12 +187,11 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
           <h3>Ви обрали {kind_trainee} на <DayOfWeek/></h3>
           <Formik
             initialValues={{
-              id: name,
+              id: "",
               day: day,
               time: time,
               kind_trainee: kind_trainee,
               name: "",
-              tel_number: "",
             }}
             onSubmit={async values => {
               // await clientAPI.sendData(values);
@@ -225,7 +214,6 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
                   <input
                     id="name"
                     onChange={handleChange}
-                    onClick={HandleChacgeName}
                     onBlur={handleBlur}
                     value={values.value}
                   />

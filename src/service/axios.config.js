@@ -25,6 +25,38 @@ export const getData = async ({id}) => {
 export const getDataALL = async () => {
   try {
     const result = await instanceClientAPI.get(`/api`);
+    // console.log(result)
+    return result.data;
+  } catch (error) {
+    toast.error('Упс, щось пішло не так');
+    console.error(error.message);
+  }
+};
+
+export const sendDataUsers = async ({ id, day, time, kind_trainee, name }) => {
+  try {
+    const res = await instanceClientAPI.post(`/tgbot`, { id, day, time, kind_trainee, name });
+    console.log("res: ", res);
+    toast.success('Зміни відправлено');
+    return res;
+  } catch (e) {
+      toast.error('Щось пішло не так');
+  }
+};
+
+export const deleteDataUsers = async ({id}) => {
+  try {
+    const result = await instanceClientAPI.put(`/tgbot`, { id });
+    return result;
+  } catch (error) {
+    toast.error('Упс, щось пішло не так');
+    console.error(error.message);
+  }
+};
+
+export const getDataALLUsers = async () => {
+  try {
+    const result = await instanceClientAPI.get(`/tgbot`);
     return result.data;
   } catch (error) {
     toast.error('Упс, щось пішло не так');
@@ -36,4 +68,7 @@ export const clientAPI = {
   sendData,
   getData,
   getDataALL,
+  sendDataUsers,
+  deleteDataUsers,
+  getDataALLUsers
 };

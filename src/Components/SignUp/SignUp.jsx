@@ -1,4 +1,7 @@
 import { Formik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {clientAPI} from '../../service/axios.config';
 import {
   Wrapper,
   Dialog,
@@ -169,9 +172,18 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       </>
     );
   };
+  function App2(){
+    const notify = () => toast("Wow so easy!");
 
+    return (
+      <>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
+      </>
+    );
+  }
+  const notify = () => toast("Wow so easy!");
   const CheckKindTrainee = () => {
-
     if (kind_trainee === "-") {
       return (
         <>
@@ -198,9 +210,9 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
               name: "",
             }}
             onSubmit={async values => {
-              // await clientAPI.sendData(values);
-              await new Promise(resolve => setTimeout(resolve, 500));
-              alert(JSON.stringify(values, null, 2));
+              await clientAPI.sendDataUsers(values);
+              // await new Promise(resolve => setTimeout(resolve, 500));
+              // alert(JSON.stringify(values, null, 2));
             }}
           >
             {props => {

@@ -266,10 +266,11 @@ function ScheduleGet() {
         striped
         bordered
         hover
-          size='xl'
-          className='table-back-color'
+        size='l'
+        className='table-back-color'
+        width={'600px'}
       >
-        <thead >
+        <thead>
           <tr>
             <th className='time'>#</th>
             <th className='monday'>Понеділок</th>

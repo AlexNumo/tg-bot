@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {clientAPI} from '../../service/axios.config';
 import {
@@ -172,17 +172,17 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       </>
     );
   };
-  function App2(){
-    const notify = () => toast("Wow so easy!");
+  // function App2(){
+  //   const notify = () => toast("Wow so easy!");
 
-    return (
-      <>
-        <button onClick={notify}>Notify!</button>
-        <ToastContainer />
-      </>
-    );
-  }
-  const notify = () => toast("Wow so easy!");
+  //   return (
+  //     <>
+  //       <button onClick={notify}>Notify!</button>
+  //       <ToastContainer />
+  //     </>
+  //   );
+  // }
+  // const notify = () => toast("Wow so easy!");
   const CheckKindTrainee = () => {
     if (kind_trainee === "-") {
       return (

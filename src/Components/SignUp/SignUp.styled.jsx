@@ -1,4 +1,5 @@
 import styled from "styled-components";
+// import { useSpring, animated } from '@react-spring/web';
 
 const Wrapper = styled.tr`
   position: absolute;
@@ -11,7 +12,7 @@ const Wrapper = styled.tr`
 
 const Dialog = styled.td`
   position: relative;
-  width: 400px;
+  width: 450px;
   height: 400px;
   padding-left: 50px;
   border: 3px solid;
@@ -34,5 +35,5 @@ export {
   Wrapper,
   Dialog,
   KindStyle,
-  SubBTN
+  SubBTN,
 };

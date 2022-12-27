@@ -3,7 +3,7 @@ import {
   Wrapper,
   Dialog,
   KindStyle,
-  SubBTN
+  SubBTN,
 } from './SignUp.styled';
 
 const SignUp = ({ Close, kind_trainee, day, time }) => {
@@ -171,6 +171,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
   };
 
   const CheckKindTrainee = () => {
+
     if (kind_trainee === "-") {
       return (
         <>
@@ -249,7 +250,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
 
   return (
     <Wrapper>
-      <CheckKindTrainee/>
+      <CheckKindTrainee />
     </Wrapper>
   )
 };

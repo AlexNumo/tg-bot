@@ -45,10 +45,12 @@ const ScheduleTable = ({
       ];
     }
     setModalOpen(true);
-    setKind_trainee(e.target.className);
+    setKind_trainee(e.target.outerText);
     setDay(e.target.id);
     setTime(e.target.name);
   };
+
+  // console.log("kind_trainee: ", kind_trainee);
 
   const BTN = ({ item }) => {
     // if (item.kind_trainee === "-") {
@@ -60,7 +62,7 @@ const ScheduleTable = ({
           key={item.id}
           id={item.day}
           name={item.time}
-          className={item.kind_trainee}
+          kind_trainee={item.kind_trainee}
           onClick={Close}
         >
           {item.kind_trainee}
@@ -77,7 +79,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
         </TableSize>
         ))}
@@ -88,7 +90,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -102,7 +104,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -116,7 +118,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -130,7 +132,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -144,7 +146,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -158,7 +160,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -172,7 +174,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -186,7 +188,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -200,7 +202,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -214,7 +216,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -228,7 +230,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}
@@ -242,7 +244,7 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          className={item.time}>
+          time={item.time}>
           <BTN item={item} />
           <NotFoundTrainee
             item={item}

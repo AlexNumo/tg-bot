@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { useSpring, animated } from '@react-spring/web';
 
 const Wrapper = styled.tr`
   position: absolute;

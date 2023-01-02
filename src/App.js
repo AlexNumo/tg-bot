@@ -8,18 +8,19 @@ function App() {
   return (
     <div className="App">
       <ScheduleGet />
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+      <div>
+        <ToastContainer
+          style={{marginTop: '55px'}}
+          position="top-left"
+          autoClose={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          theme="dark"
+        />
+      </div>
     </div>
   );
 }

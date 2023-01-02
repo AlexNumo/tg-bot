@@ -1,98 +1,100 @@
-// const TimeOfDay = ({time}) => {
-//   if (time === "0800") {
-//     return (
-//       <>
-//         <KindStyle>8:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "0900") {
-//     return (
-//       <>
-//         <KindStyle>9:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1000") {
-//     return (
-//       <>
-//         <KindStyle>10:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1100") {
-//     return (
-//       <>
-//         <KindStyle>11:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1200") {
-//     return (
-//       <>
-//         <KindStyle>12:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1300") {
-//     return (
-//       <>
-//         <KindStyle>13:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1400") {
-//     return (
-//       <>
-//         <KindStyle>14:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1500") {
-//     return (
-//       <>
-//         <KindStyle>15:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1600") {
-//     return (
-//       <>
-//         <KindStyle>16:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1700") {
-//     return (
-//       <>
-//         <KindStyle>17:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1800") {
-//     return (
-//       <>
-//         <KindStyle>18:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "1900") {
-//     return (
-//       <>
-//         <KindStyle>19:00</KindStyle>
-//       </>
-//     )
-//   };
-//   if (time === "2000") {
-//     return (
-//       <>
-//         <KindStyle>20:00</KindStyle>
-//       </>
-//     )
-//   };
-//   return (
-//     <>
-//       <h3>Сталася помилка при виборі часу</h3>
-//     </>
-//   );
-// }
+const TimeOfDay = ({ time }) => {
+  if (time === "0800") {
+    return (
+      <>
+        <span>8:00</span>
+      </>
+    )
+  };
+  if (time === "0900") {
+    return (
+      <>
+        <span>9:00</span>
+      </>
+    )
+  };
+  if (time === "1000") {
+    return (
+      <>
+        <span>10:00</span>
+      </>
+    )
+  };
+  if (time === "1100") {
+    return (
+      <>
+        <span>11:00</span>
+      </>
+    )
+  };
+  if (time === "1200") {
+    return (
+      <>
+        <span>12:00</span>
+      </>
+    )
+  };
+  if (time === "1300") {
+    return (
+      <>
+        <span>13:00</span>
+      </>
+    )
+  };
+  if (time === "1400") {
+    return (
+      <>
+        <span>14:00</span>
+      </>
+    )
+  };
+  if (time === "1500") {
+    return (
+      <>
+        <span>15:00</span>
+      </>
+    )
+  };
+  if (time === "1600") {
+    return (
+      <>
+        <span>16:00</span>
+      </>
+    )
+  };
+  if (time === "1700") {
+    return (
+      <>
+        <span>17:00</span>
+      </>
+    )
+  };
+  if (time === "1800") {
+    return (
+      <>
+        <span>18:00</span>
+      </>
+    )
+  };
+  if (time === "1900") {
+    return (
+      <>
+        <span>19:00</span>
+      </>
+    )
+  };
+  if (time === "2000") {
+    return (
+      <>
+        <span>20:00</span>
+      </>
+    )
+  };
+  return (
+    <>
+      <h3>Сталася помилка при виборі часу</h3>
+    </>
+  );
+};
+
+export default TimeOfDay;

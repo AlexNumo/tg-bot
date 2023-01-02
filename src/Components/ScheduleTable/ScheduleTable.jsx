@@ -2,6 +2,7 @@ import {
   TableSize,
 } from './ScheduleTable.styled';
 import moment from 'moment/moment';
+// import TimeOfDay from 'Components/TimeOfDay/TimeOfDay';
 import { useEffect, useState } from 'react';
 import SignUp from 'Components/SignUp/SignUp';
 
@@ -34,7 +35,7 @@ const ScheduleTable = ({
   const [saturday, setSaturday] = useState('');
 
   useEffect(() => {
-  const TEST = () => {
+  const DateToday = () => {
     const dateClickOnBTN = moment().format('dddd');  
     if (dateClickOnBTN === "Monday") {
       return [
@@ -107,7 +108,7 @@ const ScheduleTable = ({
         setSaturday(moment().add(6, 'days')._d)]
     };
     };
-    TEST();
+    DateToday();
   },[setSunday])
 
   const NotFoundTrainee = ({ item }) => {
@@ -139,6 +140,7 @@ const ScheduleTable = ({
   };
 
   const BTN = ({ item }) => {
+      console.log("item: ", item)
     if (item.day === "monday") {
       return (
         <>
@@ -259,7 +261,7 @@ const ScheduleTable = ({
   //     </td>
   //   </tr>
   // )
-
+  console.log()
   return (
     <>
       <tr className='time'>

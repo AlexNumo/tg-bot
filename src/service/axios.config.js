@@ -1,6 +1,8 @@
+import instanceClientAPI from './api';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import instanceClientAPI from './api';
+import ToastInfo from 'Components/ToastInfo/ToastInfo';
+
 
 export const sendData = async ({ id, day, time, kind_trainee, name_Coach }) => {
   try {
@@ -38,16 +40,7 @@ export const sendDataUsers = async ({ id, info }) => {
     const res = await instanceClientAPI.post(`/tgbot`, { id, info });
     console.log("res: ", res.data);
     console.log("info: ", info);
-    toast.info(`${info.name}, Ви записалися на тренування ${info.kind_trainee} об ${info.time} у ${info.day}`, {
-      position: "top-center",
-      autoClose: 10000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+    ToastInfo({info});
     return res;
   } catch (e) {
       toast.error('Щось пішло не так');

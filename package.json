@@ -10,6 +10,7 @@
     "@vkruglikov/react-telegram-web-app": "^1.6.0",
     "axios": "^1.2.1",
     "formik": "^2.2.9",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",

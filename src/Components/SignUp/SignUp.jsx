@@ -1,6 +1,4 @@
 import { Formik } from 'formik';
-// import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import {clientAPI} from '../../service/axios.config';
 import {
   Wrapper,
@@ -9,7 +7,7 @@ import {
   SubBTN,
 } from './SignUp.styled';
 
-const SignUp = ({ Close, kind_trainee, day, time }) => {
+const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const TimeOfDay = () => {
     if (time === "0800") {
       return (
@@ -172,17 +170,7 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
       </>
     );
   };
-  // function App2(){
-  //   const notify = () => toast("Wow so easy!");
 
-  //   return (
-  //     <>
-  //       <button onClick={notify}>Notify!</button>
-  //       <ToastContainer />
-  //     </>
-  //   );
-  // }
-  // const notify = () => toast("Wow so easy!");
   const CheckKindTrainee = () => {
     if (kind_trainee === "-") {
       return (
@@ -199,15 +187,18 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
     return (
       <>
         <Dialog>
-          <h4>Ви обрали <KindStyle>{kind_trainee} на </KindStyle><DayOfWeek /></h4><br />
+          <h4>Ви обрали <KindStyle>{kind_trainee} об </KindStyle><DayOfWeek /></h4><br />
           <h4>Будь ласка, введіть наступні дані</h4><br />
           <Formik
             initialValues={{
               id: "",
-              day: day,
-              time: time,
-              kind_trainee: kind_trainee,
-              name: "",
+              info: {
+                date: date,
+                day: day,
+                time: time,
+                kind_trainee: kind_trainee,
+                name: "",
+              }
             }}
             onSubmit={async values => {
               await clientAPI.sendDataUsers(values);
@@ -227,16 +218,16 @@ const SignUp = ({ Close, kind_trainee, day, time }) => {
                 <form
                   onSubmit={handleSubmit}
                 >
-                  <label htmlFor="name">
+                  <label htmlFor="info.name">
                     Ваше ім'я
                   </label><br/>
                   <input
-                    id="name"
+                    id="info.name"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.value}
                   /><br/>
-                  <label htmlFor="name">
+                  <label htmlFor="id">
                     Ваш номер телефону
                   </label><br/>
                   <input

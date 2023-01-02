@@ -1,7 +1,8 @@
 import {
   TableSize,
 } from './ScheduleTable.styled';
-import { useState } from 'react';
+import moment from 'moment/moment';
+import { useEffect, useState } from 'react';
 import SignUp from 'Components/SignUp/SignUp';
 
 const ScheduleTable = ({ 
@@ -23,6 +24,91 @@ const ScheduleTable = ({
   const [kind_trainee, setKind_trainee] = useState('');
   const [day, setDay] = useState('');
   const [time, setTime] = useState('');
+  const [dateClickOnBTN, setDateClickOnBTN] = useState('');
+  const [sunday, setSunday] = useState('');
+  const [monday, setMonday] = useState('');
+  const [tuesday, setTuesday] = useState('');
+  const [wednesday, setWednesday] = useState('');
+  const [thursday, setThursday] = useState('');
+  const [friday, setFriday] = useState('');
+  const [saturday, setSaturday] = useState('');
+
+  useEffect(() => {
+  const TEST = () => {
+    const dateClickOnBTN = moment().format('dddd');  
+    if (dateClickOnBTN === "Monday") {
+      return [
+        setSunday(moment().add(6, 'days')._d),
+        setMonday(moment().add( 0 ,'days')._d),
+        setTuesday(moment().add(1 , 'days')._d),
+        setWednesday(moment().add(2, 'days')._d),
+        setThursday(moment().add(3, 'days')._d),
+        setFriday(moment().add(4, 'days')._d),
+        setSaturday(moment().add(5, 'days')._d)]
+    };
+    if (dateClickOnBTN === "Tuesday") {
+      return [
+        setSunday(moment().add(5, 'days')._d),
+        setMonday(moment().add(6,'days')._d),
+        setTuesday(moment().add(0 , 'days')._d),
+        setWednesday(moment().add(1, 'days')._d),
+        setThursday(moment().add(2, 'days')._d),
+        setFriday(moment().add(3, 'days')._d),
+        setSaturday(moment().add(4, 'days')._d)]
+    };
+    if (dateClickOnBTN === "Wednesday") {
+      return [
+        setSunday(moment().add(4, 'days')._d),
+        setMonday(moment().add(5,'days')._d),
+        setTuesday(moment().add(6, 'days')._d),
+        setWednesday(moment().add(0, 'days')._d),
+        setThursday(moment().add(1, 'days')._d),
+        setFriday(moment().add(2, 'days')._d),
+        setSaturday(moment().add(3, 'days')._d)]
+    };
+    if (dateClickOnBTN === "Thursday") {
+      return [
+        setSunday(moment().add(3, 'days')._d),
+        setMonday(moment().add(4,'days')._d),
+        setTuesday(moment().add(5, 'days')._d),
+        setWednesday(moment().add(6, 'days')._d),
+        setThursday(moment().add(0, 'days')._d),
+        setFriday(moment().add(1, 'days')._d),
+        setSaturday(moment().add(2, 'days')._d)]
+    };
+    if (dateClickOnBTN === "Friday") {
+      return [
+        setSunday(moment().add(2, 'days')._d),
+        setMonday(moment().add(3,'days')._d),
+        setTuesday(moment().add(4, 'days')._d),
+        setWednesday(moment().add(5, 'days')._d),
+        setThursday(moment().add(6, 'days')._d),
+        setFriday(moment().add(0, 'days')._d),
+        setSaturday(moment().add(1, 'days')._d)]
+    };
+    if (dateClickOnBTN === "Saturday") {
+      return [
+        setSunday(moment().add(1, 'days')._d),
+        setMonday(moment().add(2,'days')._d),
+        setTuesday(moment().add(3, 'days')._d),
+        setWednesday(moment().add(4, 'days')._d),
+        setThursday(moment().add(5, 'days')._d),
+        setFriday(moment().add(6, 'days')._d),
+        setSaturday(moment().add(0, 'days')._d)]
+    };
+    if (dateClickOnBTN === "Sunday") {
+      return [
+        setSunday(moment().add(0, 'days')._d),
+        setMonday(moment().add(1,'days')._d),
+        setTuesday(moment().add(2, 'days')._d),
+        setWednesday(moment().add(3, 'days')._d),
+        setThursday(moment().add(4, 'days')._d),
+        setFriday(moment().add(5, 'days')._d),
+        setSaturday(moment().add(6, 'days')._d)]
+    };
+    };
+    TEST();
+  },[setSunday])
 
   const NotFoundTrainee = ({ item }) => {
     if (item.kind_trainee === "-") {
@@ -41,35 +127,138 @@ const ScheduleTable = ({
         setModalOpen(false),
         setKind_trainee(''),
         setDay(''),
-        setTime('')
+        setTime(''),
+        setDateClickOnBTN('')
       ];
     }
     setModalOpen(true);
     setKind_trainee(e.target.outerText);
     setDay(e.target.id);
     setTime(e.target.name);
+    setDateClickOnBTN(e.target.className);
   };
 
-  // console.log("kind_trainee: ", kind_trainee);
-
   const BTN = ({ item }) => {
-    // if (item.kind_trainee === "-") {
-    //   return (null)
-    // }
-    return (
-      <>
-        <button style={{width: '80px'}}
-          key={item.id}
-          id={item.day}
-          name={item.time}
-          kind_trainee={item.kind_trainee}
-          onClick={Close}
-        >
-          {item.kind_trainee}
-        </button>
-      </>
-    )
+    if (item.day === "monday") {
+      return (
+        <>
+          <button style={{ width: '80px' }}
+            key={item.id}
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={monday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </button>
+        </>
+      )
+    };
+    if (item.day === "tuesday") {
+      return (
+        <>
+          <button style={{ width: '80px' }}
+            key={item.id}
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={tuesday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </button>
+        </>
+      )
+    };
+    if (item.day === "wednesday") {
+      return (
+        <>
+          <button style={{ width: '80px' }}
+            key={item.id}
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={wednesday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </button>
+        </>
+      )
+    };
+    if (item.day === "thursday") {
+      return (
+        <>
+          <button style={{ width: '80px' }}
+            key={item.id}
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={thursday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </button>
+        </>
+      )
+    };
+    if (item.day === "friday") {
+      return (
+        <>
+          <button style={{ width: '80px' }}
+            key={item.id}
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={friday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </button>
+        </>
+      )
+    };
+    if (item.day === "saturday") {
+      return (
+        <>
+          <button style={{ width: '80px' }}
+            key={item.id}
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={saturday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </button>
+        </>
+      )
+    };
+    if (item.day === "sunday") {
+      return (
+        <>
+          <button style={{ width: '80px' }}
+            key={item.id}
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={sunday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </button>
+        </>
+      )
+    };
   }
+  // return (
+  //   <tr>
+  //     <td>
+  //       <button onClick={TEST}>DATE</button>
+  //     </td>
+  //   </tr>
+  // )
 
   return (
     <>
@@ -79,7 +268,9 @@ const ScheduleTable = ({
         <TableSize
           key={item.id}
           id={item.day}
-          time={item.time}>
+          time={item.time}
+          // className="dsaasd"
+          >
           <BTN item={item} />
         </TableSize>
         ))}
@@ -258,6 +449,7 @@ const ScheduleTable = ({
           kind_trainee={kind_trainee}
           day={day}
           time={time}
+          date={dateClickOnBTN}
         />
         :
         null}

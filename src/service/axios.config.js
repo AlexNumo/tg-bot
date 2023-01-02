@@ -33,11 +33,21 @@ export const getDataALL = async () => {
   }
 };
 
-export const sendDataUsers = async ({ id, day, time, kind_trainee, name }) => {
+export const sendDataUsers = async ({ id, info }) => {
   try {
-    const res = await instanceClientAPI.post(`/tgbot`, { id, day, time, kind_trainee, name });
-    console.log("res: ", res);
-    toast.success('Зміни відправлено');
+    const res = await instanceClientAPI.post(`/tgbot`, { id, info });
+    console.log("res: ", res.data);
+    console.log("info: ", info);
+    toast.info(`${info.name}, Ви записалися на тренування ${info.kind_trainee} об ${info.time} у ${info.day}`, {
+      position: "top-center",
+      autoClose: 10000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
     return res;
   } catch (e) {
       toast.error('Щось пішло не так');

@@ -364,7 +364,6 @@ const Schedule = () => {
     return (
       <WrapperBTN>
         <BTN
-          key={item.id}
           id={item.day}
           name={item.time}
           kind_trainee={item.kind_trainee}
@@ -390,7 +389,7 @@ const Schedule = () => {
       <WrapperDay>
         <Time>08:00</Time>
         {data0800.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN key={item.id} item={item}/>
         ))}
       </WrapperDay>
       <WrapperDay>

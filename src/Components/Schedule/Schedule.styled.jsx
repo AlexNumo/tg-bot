@@ -22,7 +22,7 @@ const BTN = styled.button`
   margin: 2px;
   padding: 2px;
   color: black;
-  /* border-radius: 0px; */
+  border-radius: none;
 `;
 
 const Days = styled.span`

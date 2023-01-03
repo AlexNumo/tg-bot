@@ -34,81 +34,81 @@ const ScheduleTable = ({
   const [saturday, setSaturday] = useState('');
 
   useEffect(() => {
-  const DateToday = () => {
-    const dateClickOnBTN = moment().format('dddd');  
-    if (dateClickOnBTN === "Monday") {
-      return [
-        setSunday(moment().add(6, 'days')._d),
-        setMonday(moment().add( 0 ,'days')._d),
-        setTuesday(moment().add(1 , 'days')._d),
-        setWednesday(moment().add(2, 'days')._d),
-        setThursday(moment().add(3, 'days')._d),
-        setFriday(moment().add(4, 'days')._d),
-        setSaturday(moment().add(5, 'days')._d)]
-    };
-    if (dateClickOnBTN === "Tuesday") {
-      return [
-        setSunday(moment().add(5, 'days')._d),
-        setMonday(moment().add(6,'days')._d),
-        setTuesday(moment().add(0 , 'days')._d),
-        setWednesday(moment().add(1, 'days')._d),
-        setThursday(moment().add(2, 'days')._d),
-        setFriday(moment().add(3, 'days')._d),
-        setSaturday(moment().add(4, 'days')._d)]
-    };
-    if (dateClickOnBTN === "Wednesday") {
-      return [
-        setSunday(moment().add(4, 'days')._d),
-        setMonday(moment().add(5,'days')._d),
-        setTuesday(moment().add(6, 'days')._d),
-        setWednesday(moment().add(0, 'days')._d),
-        setThursday(moment().add(1, 'days')._d),
-        setFriday(moment().add(2, 'days')._d),
-        setSaturday(moment().add(3, 'days')._d)]
-    };
-    if (dateClickOnBTN === "Thursday") {
-      return [
-        setSunday(moment().add(3, 'days')._d),
-        setMonday(moment().add(4,'days')._d),
-        setTuesday(moment().add(5, 'days')._d),
-        setWednesday(moment().add(6, 'days')._d),
-        setThursday(moment().add(0, 'days')._d),
-        setFriday(moment().add(1, 'days')._d),
-        setSaturday(moment().add(2, 'days')._d)]
-    };
-    if (dateClickOnBTN === "Friday") {
-      return [
-        setSunday(moment().add(2, 'days')._d),
-        setMonday(moment().add(3,'days')._d),
-        setTuesday(moment().add(4, 'days')._d),
-        setWednesday(moment().add(5, 'days')._d),
-        setThursday(moment().add(6, 'days')._d),
-        setFriday(moment().add(0, 'days')._d),
-        setSaturday(moment().add(1, 'days')._d)]
-    };
-    if (dateClickOnBTN === "Saturday") {
-      return [
-        setSunday(moment().add(1, 'days')._d),
-        setMonday(moment().add(2,'days')._d),
-        setTuesday(moment().add(3, 'days')._d),
-        setWednesday(moment().add(4, 'days')._d),
-        setThursday(moment().add(5, 'days')._d),
-        setFriday(moment().add(6, 'days')._d),
-        setSaturday(moment().add(0, 'days')._d)]
-    };
-    if (dateClickOnBTN === "Sunday") {
-      return [
-        setSunday(moment().add(0, 'days')._d),
-        setMonday(moment().add(1,'days')._d),
-        setTuesday(moment().add(2, 'days')._d),
-        setWednesday(moment().add(3, 'days')._d),
-        setThursday(moment().add(4, 'days')._d),
-        setFriday(moment().add(5, 'days')._d),
-        setSaturday(moment().add(6, 'days')._d)]
-    };
+    const DateToday = () => {
+      const dateClickOnBTN = moment().format('dddd');
+      if (dateClickOnBTN === "Monday") {
+        return [
+          setSunday(moment().add(6, 'days')._d),
+          setMonday(moment().add(0, 'days')._d),
+          setTuesday(moment().add(1, 'days')._d),
+          setWednesday(moment().add(2, 'days')._d),
+          setThursday(moment().add(3, 'days')._d),
+          setFriday(moment().add(4, 'days')._d),
+          setSaturday(moment().add(5, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Tuesday") {
+        return [
+          setSunday(moment().add(5, 'days')._d),
+          setMonday(moment().add(6, 'days')._d),
+          setTuesday(moment().add(0, 'days')._d),
+          setWednesday(moment().add(1, 'days')._d),
+          setThursday(moment().add(2, 'days')._d),
+          setFriday(moment().add(3, 'days')._d),
+          setSaturday(moment().add(4, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Wednesday") {
+        return [
+          setSunday(moment().add(4, 'days')._d),
+          setMonday(moment().add(5, 'days')._d),
+          setTuesday(moment().add(6, 'days')._d),
+          setWednesday(moment().add(0, 'days')._d),
+          setThursday(moment().add(1, 'days')._d),
+          setFriday(moment().add(2, 'days')._d),
+          setSaturday(moment().add(3, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Thursday") {
+        return [
+          setSunday(moment().add(3, 'days')._d),
+          setMonday(moment().add(4, 'days')._d),
+          setTuesday(moment().add(5, 'days')._d),
+          setWednesday(moment().add(6, 'days')._d),
+          setThursday(moment().add(0, 'days')._d),
+          setFriday(moment().add(1, 'days')._d),
+          setSaturday(moment().add(2, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Friday") {
+        return [
+          setSunday(moment().add(2, 'days')._d),
+          setMonday(moment().add(3, 'days')._d),
+          setTuesday(moment().add(4, 'days')._d),
+          setWednesday(moment().add(5, 'days')._d),
+          setThursday(moment().add(6, 'days')._d),
+          setFriday(moment().add(0, 'days')._d),
+          setSaturday(moment().add(1, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Saturday") {
+        return [
+          setSunday(moment().add(1, 'days')._d),
+          setMonday(moment().add(2, 'days')._d),
+          setTuesday(moment().add(3, 'days')._d),
+          setWednesday(moment().add(4, 'days')._d),
+          setThursday(moment().add(5, 'days')._d),
+          setFriday(moment().add(6, 'days')._d),
+          setSaturday(moment().add(0, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Sunday") {
+        return [
+          setSunday(moment().add(0, 'days')._d),
+          setMonday(moment().add(1, 'days')._d),
+          setTuesday(moment().add(2, 'days')._d),
+          setWednesday(moment().add(3, 'days')._d),
+          setThursday(moment().add(4, 'days')._d),
+          setFriday(moment().add(5, 'days')._d),
+          setSaturday(moment().add(6, 'days')._d)]
+      };
     };
     DateToday();
-  },[setSunday])
+  }, [setSunday]);
 
   const NotFoundTrainee = ({ item }) => {
     if (item.kind_trainee === "-") {

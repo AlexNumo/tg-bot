@@ -15,19 +15,25 @@ const WrapperBTN = styled.div`
 
 const BTN = styled.button`
   font-family: 'Times New Roman', Times, serif;
-  font-size: 13px;
+  font-size: 8px;
   font-weight: 400;
   width: 100%;
   height: 100%;
   /* margin: 2px; */
-  border-radius: 0px;
+  /* border-radius: 0px; */
 `;
 
 const Days = styled.span`
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 8px;
+  font-weight: 400;
   width: 80px;
 `;
 
 const Time = styled.span`
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 8px;
+  font-weight: 400;
   width: 40px;
 `;
 

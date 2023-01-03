@@ -19,10 +19,9 @@ const BTN = styled.button`
   font-weight: 400;
   width: 100%;
   height: 100%;
-  margin: 2px;
+  margin: 12px;
   padding: 2px;
   color: black;
-  border-radius: none;
 `;
 
 const Days = styled.span`

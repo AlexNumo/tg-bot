@@ -19,7 +19,8 @@ const BTN = styled.button`
   font-weight: 400;
   width: 100%;
   height: 100%;
-  /* margin: 2px; */
+  margin: 2px;
+  padding: 2px;
   /* border-radius: 0px; */
 `;
 

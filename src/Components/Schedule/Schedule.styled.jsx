@@ -21,6 +21,7 @@ const BTN = styled.button`
   height: 100%;
   margin: 2px;
   padding: 2px;
+  color: black;
   /* border-radius: 0px; */
 `;
 
@@ -29,6 +30,7 @@ const Days = styled.span`
   font-size: 8px;
   font-weight: 400;
   width: 80px;
+  color: black;
 `;
 
 const Time = styled.span`
@@ -36,6 +38,7 @@ const Time = styled.span`
   font-size: 8px;
   font-weight: 400;
   width: 40px;
+  color: black;
 `;
 
 export {

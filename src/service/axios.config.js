@@ -35,12 +35,11 @@ export const getDataALL = async () => {
   }
 };
 
-export const sendDataUsers = async ({ id, info }) => {
+export const sendDataUsers = async ({ id, day_translate, info }) => {
   try {
     const res = await instanceClientAPI.post(`/tgbot`, { id, info });
-    console.log("res: ", res.data);
-    console.log("info: ", info);
-    ToastInfo({info});
+    console.log(day_translate);
+    ToastInfo({day_translate, info});
     return res;
   } catch (e) {
       toast.error('Щось пішло не так');

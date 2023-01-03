@@ -2,7 +2,6 @@ import {
   TableSize,
 } from './ScheduleTable.styled';
 import moment from 'moment/moment';
-// import TimeOfDay from 'Components/TimeOfDay/TimeOfDay';
 import { useEffect, useState } from 'react';
 import SignUp from 'Components/SignUp/SignUp';
 
@@ -115,11 +114,7 @@ const ScheduleTable = ({
     if (item.kind_trainee === "-") {
       return null;
     }
-    return (null
-      // <>
-      //   <span>, тренер "{item.name_Coach }"</span>
-      // </>
-    )
+    return (null)
   };
 
   const Close = (e) => {
@@ -140,7 +135,6 @@ const ScheduleTable = ({
   };
 
   const BTN = ({ item }) => {
-      console.log("item: ", item)
     if (item.day === "monday") {
       return (
         <>
@@ -261,7 +255,7 @@ const ScheduleTable = ({
   //     </td>
   //   </tr>
   // )
-  console.log()
+  // console.log()
   return (
     <>
       <tr className='time'>

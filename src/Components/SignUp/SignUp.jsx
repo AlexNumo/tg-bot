@@ -7,8 +7,38 @@ import {
   KindStyle,
   SubBTN,
 } from './SignUp.styled';
+import { useEffect, useState } from 'react';
 
 const SignUp = ({ Close, kind_trainee, day, time, date }) => {
+  const [dayTranslate, setDayTranslate] = useState('');
+
+  useEffect(() => {
+    const DayOfWeekTranslate = () => {
+      if (day === "monday") {
+        return (setDayTranslate('понеділок'));
+      };
+      if (day === "tuesday") {
+        return (setDayTranslate('вівторок'));
+      };
+      if (day === "wednesday") {
+        return (setDayTranslate('середу'));
+      };
+      if (day === "thursday") {
+        return (setDayTranslate('четвер'));
+      };
+      if (day === "friday") {
+        return (setDayTranslate(`п'ятницю`));
+      };
+      if (day === "saturday") {
+        return (setDayTranslate('суботу'));
+      };
+      if (day === "sunday") {
+        return (setDayTranslate('неділю'));
+      };
+      return (null);
+    };
+    DayOfWeekTranslate();
+  }, [day]);
 
   const CheckKindTrainee = () => {
     if (kind_trainee === "-") {
@@ -22,7 +52,9 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           </Dialog>
         </>
       )
-    }
+    };
+
+    
     return (
       <>
         <Dialog>
@@ -31,6 +63,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           <Formik
             initialValues={{
               id: "",
+              day_translate: dayTranslate,
               info: {
                 date: date,
                 day: day,

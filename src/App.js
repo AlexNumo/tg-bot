@@ -1,5 +1,5 @@
 import './App.css';
-import { ToastContainer } from 'react-toastify';
+// import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import ScheduleGet from 'Components/ScheduleGet/ScheduleGet';
 import Schedule from 'Components/Schedule/Schedule';
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       {/* <ScheduleGet /> */}
       <Schedule/>
-      <div>
+      {/* <div>
         <ToastContainer
           style={{marginTop: '55px'}}
           position="top-left"
@@ -22,7 +22,7 @@ function App() {
           draggable
           theme="dark"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

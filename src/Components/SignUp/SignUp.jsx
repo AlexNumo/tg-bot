@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import { clientAPI } from '../../service/axios.config';
 import DayOfWeek from 'Components/DayOfWeek/DayOfWeek';
+import { ToastContainer } from 'react-toastify';
 import {
   Wrapper,
   Dialog,
@@ -119,6 +120,19 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
             }}
           </Formik>
         </Dialog>
+              <div>
+        <ToastContainer
+          style={{marginTop: '55px'}}
+          position="top-left"
+          autoClose={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          theme="dark"
+        />
+      </div>
       </>
     )
   }

@@ -1,21 +1,27 @@
 import styled from "styled-components";
 
-const Wrapper = styled.tr`
+const Wrapper = styled.div`
   position: absolute;
   width: 100vw;
   height: 100vh;
   left: 0;
   top: 0;
-  background-color: rgba(53, 51, 51, 0.5);
+  background-color: rgba(194, 209, 99, 0.5);
 `;
 
-const Dialog = styled.td`
+const Dialog = styled.div`
   position: relative;
-  width: 450px;
-  height: 400px;
-  padding-left: 50px;
+  width: 250px;
+  height: 300px;
+  margin: auto;
+  padding-top: 25px;
+  /* margin-left: auto;
+  margin-right: auto;
+  margin-right: auto;
+  margin-right: auto; */
+  padding-left: 20px;
   border: 3px solid;
-  background-color: #9997e2;
+  background-color: #9cda9e;
 `;
 
 const KindStyle = styled.span`

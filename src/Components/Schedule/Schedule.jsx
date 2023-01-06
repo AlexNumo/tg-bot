@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { clientAPI } from 'service/axios.config';
-// import SignUp from 'Components/SignUp/SignUp';
-// import moment from 'moment/moment';
+import SignUp from 'Components/SignUp/SignUp';
+import moment from 'moment/moment';
 import {
   WrapperDay,
   WrapperBTN,
@@ -23,18 +23,18 @@ const Schedule = () => {
   const [data1800, setData1800] = useState([]);
   const [data1900, setData1900] = useState([]);
   const [data2000, setData2000] = useState([]);
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const [kind_trainee, setKind_trainee] = useState('');
-  // const [day, setDay] = useState('');
-  // const [time, setTime] = useState('');
-  // const [dateClickOnBTN, setDateClickOnBTN] = useState('');
-  // const [sunday, setSunday] = useState('');
-  // const [monday, setMonday] = useState('');
-  // const [tuesday, setTuesday] = useState('');
-  // const [wednesday, setWednesday] = useState('');
-  // const [thursday, setThursday] = useState('');
-  // const [friday, setFriday] = useState('');
-  // const [saturday, setSaturday] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [kind_trainee, setKind_trainee] = useState('');
+  const [day, setDay] = useState('');
+  const [time, setTime] = useState('');
+  const [dateClickOnBTN, setDateClickOnBTN] = useState('');
+  const [sunday, setSunday] = useState('');
+  const [monday, setMonday] = useState('');
+  const [tuesday, setTuesday] = useState('');
+  const [wednesday, setWednesday] = useState('');
+  const [thursday, setThursday] = useState('');
+  const [friday, setFriday] = useState('');
+  const [saturday, setSaturday] = useState('');
 
   useEffect(() => {
     clientAPI.getDataALL().then(
@@ -266,112 +266,206 @@ const Schedule = () => {
   },
    [setData0800]
   );
-  // useEffect(() => {
-  //   const DateToday = () => {
-  //     const dateClickOnBTN = moment().format('dddd');
-  //     if (dateClickOnBTN === "Monday") {
-  //       return [
-  //         setSunday(moment().add(6, 'days')._d),
-  //         setMonday(moment().add(0, 'days')._d),
-  //         setTuesday(moment().add(1, 'days')._d),
-  //         setWednesday(moment().add(2, 'days')._d),
-  //         setThursday(moment().add(3, 'days')._d),
-  //         setFriday(moment().add(4, 'days')._d),
-  //         setSaturday(moment().add(5, 'days')._d)]
-  //     };
-  //     if (dateClickOnBTN === "Tuesday") {
-  //       return [
-  //         setSunday(moment().add(5, 'days')._d),
-  //         setMonday(moment().add(6, 'days')._d),
-  //         setTuesday(moment().add(0, 'days')._d),
-  //         setWednesday(moment().add(1, 'days')._d),
-  //         setThursday(moment().add(2, 'days')._d),
-  //         setFriday(moment().add(3, 'days')._d),
-  //         setSaturday(moment().add(4, 'days')._d)]
-  //     };
-  //     if (dateClickOnBTN === "Wednesday") {
-  //       return [
-  //         setSunday(moment().add(4, 'days')._d),
-  //         setMonday(moment().add(5, 'days')._d),
-  //         setTuesday(moment().add(6, 'days')._d),
-  //         setWednesday(moment().add(0, 'days')._d),
-  //         setThursday(moment().add(1, 'days')._d),
-  //         setFriday(moment().add(2, 'days')._d),
-  //         setSaturday(moment().add(3, 'days')._d)]
-  //     };
-  //     if (dateClickOnBTN === "Thursday") {
-  //       return [
-  //         setSunday(moment().add(3, 'days')._d),
-  //         setMonday(moment().add(4, 'days')._d),
-  //         setTuesday(moment().add(5, 'days')._d),
-  //         setWednesday(moment().add(6, 'days')._d),
-  //         setThursday(moment().add(0, 'days')._d),
-  //         setFriday(moment().add(1, 'days')._d),
-  //         setSaturday(moment().add(2, 'days')._d)]
-  //     };
-  //     if (dateClickOnBTN === "Friday") {
-  //       return [
-  //         setSunday(moment().add(2, 'days')._d),
-  //         setMonday(moment().add(3, 'days')._d),
-  //         setTuesday(moment().add(4, 'days')._d),
-  //         setWednesday(moment().add(5, 'days')._d),
-  //         setThursday(moment().add(6, 'days')._d),
-  //         setFriday(moment().add(0, 'days')._d),
-  //         setSaturday(moment().add(1, 'days')._d)]
-  //     };
-  //     if (dateClickOnBTN === "Saturday") {
-  //       return [
-  //         setSunday(moment().add(1, 'days')._d),
-  //         setMonday(moment().add(2, 'days')._d),
-  //         setTuesday(moment().add(3, 'days')._d),
-  //         setWednesday(moment().add(4, 'days')._d),
-  //         setThursday(moment().add(5, 'days')._d),
-  //         setFriday(moment().add(6, 'days')._d),
-  //         setSaturday(moment().add(0, 'days')._d)]
-  //     };
-  //     if (dateClickOnBTN === "Sunday") {
-  //       return [
-  //         setSunday(moment().add(0, 'days')._d),
-  //         setMonday(moment().add(1, 'days')._d),
-  //         setTuesday(moment().add(2, 'days')._d),
-  //         setWednesday(moment().add(3, 'days')._d),
-  //         setThursday(moment().add(4, 'days')._d),
-  //         setFriday(moment().add(5, 'days')._d),
-  //         setSaturday(moment().add(6, 'days')._d)]
-  //     };
-  //   };
-  //   DateToday();
-  // }, [setSunday]);
-  // console.log(data0800);
-  // const Close = (e) => {
-  //   if (modalOpen === true) {
-  //     return [
-  //       setModalOpen(false),
-  //       setKind_trainee(''),
-  //       setDay(''),
-  //       setTime(''),
-  //       setDateClickOnBTN('')
-  //     ];
-  //   }
-  //   setModalOpen(true);
-  //   setKind_trainee(e.target.outerText);
-  //   setDay(e.target.id);
-  //   setTime(e.target.name);
-  //   setDateClickOnBTN(e.target.className);
-  // };
+  useEffect(() => {
+    const DateToday = () => {
+      const dateClickOnBTN = moment().format('dddd');
+      if (dateClickOnBTN === "Monday") {
+        return [
+          setSunday(moment().add(6, 'days')._d),
+          setMonday(moment().add(0, 'days')._d),
+          setTuesday(moment().add(1, 'days')._d),
+          setWednesday(moment().add(2, 'days')._d),
+          setThursday(moment().add(3, 'days')._d),
+          setFriday(moment().add(4, 'days')._d),
+          setSaturday(moment().add(5, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Tuesday") {
+        return [
+          setSunday(moment().add(5, 'days')._d),
+          setMonday(moment().add(6, 'days')._d),
+          setTuesday(moment().add(0, 'days')._d),
+          setWednesday(moment().add(1, 'days')._d),
+          setThursday(moment().add(2, 'days')._d),
+          setFriday(moment().add(3, 'days')._d),
+          setSaturday(moment().add(4, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Wednesday") {
+        return [
+          setSunday(moment().add(4, 'days')._d),
+          setMonday(moment().add(5, 'days')._d),
+          setTuesday(moment().add(6, 'days')._d),
+          setWednesday(moment().add(0, 'days')._d),
+          setThursday(moment().add(1, 'days')._d),
+          setFriday(moment().add(2, 'days')._d),
+          setSaturday(moment().add(3, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Thursday") {
+        return [
+          setSunday(moment().add(3, 'days')._d),
+          setMonday(moment().add(4, 'days')._d),
+          setTuesday(moment().add(5, 'days')._d),
+          setWednesday(moment().add(6, 'days')._d),
+          setThursday(moment().add(0, 'days')._d),
+          setFriday(moment().add(1, 'days')._d),
+          setSaturday(moment().add(2, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Friday") {
+        return [
+          setSunday(moment().add(2, 'days')._d),
+          setMonday(moment().add(3, 'days')._d),
+          setTuesday(moment().add(4, 'days')._d),
+          setWednesday(moment().add(5, 'days')._d),
+          setThursday(moment().add(6, 'days')._d),
+          setFriday(moment().add(0, 'days')._d),
+          setSaturday(moment().add(1, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Saturday") {
+        return [
+          setSunday(moment().add(1, 'days')._d),
+          setMonday(moment().add(2, 'days')._d),
+          setTuesday(moment().add(3, 'days')._d),
+          setWednesday(moment().add(4, 'days')._d),
+          setThursday(moment().add(5, 'days')._d),
+          setFriday(moment().add(6, 'days')._d),
+          setSaturday(moment().add(0, 'days')._d)]
+      };
+      if (dateClickOnBTN === "Sunday") {
+        return [
+          setSunday(moment().add(0, 'days')._d),
+          setMonday(moment().add(1, 'days')._d),
+          setTuesday(moment().add(2, 'days')._d),
+          setWednesday(moment().add(3, 'days')._d),
+          setThursday(moment().add(4, 'days')._d),
+          setFriday(moment().add(5, 'days')._d),
+          setSaturday(moment().add(6, 'days')._d)]
+      };
+    };
+    DateToday();
+  }, [setSunday]);
+  // console.log("thursday: ", thursday);
+  const Close = (e) => {
+    if (modalOpen === true) {
+      return [
+        setModalOpen(false),
+        setKind_trainee(''),
+        setDay(''),
+        setTime(''),
+        setDateClickOnBTN('')
+      ];
+    }
+    setModalOpen(true);
+    setKind_trainee(e.target.outerText);
+    setDay(e.target.id);
+    setTime(e.target.name);
+    setDateClickOnBTN(e.target.className);
+  };
 
   const ChooseBTN = ({ item }) => {
-    return (
-      <WrapperBTN>
-        <BTN
-          id={item.day}
-          name={item.time}
-          kind_trainee={item.kind_trainee}
-        >
-          {item.kind_trainee}
-        </BTN>
-      </WrapperBTN>
-    )
+    if (item.day === "monday") {
+      return (
+        <WrapperBTN>
+          <BTN
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={monday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </BTN>
+        </WrapperBTN>
+      )
+    };
+    if (item.day === "tuesday") {
+      return (
+        <WrapperBTN>
+          <BTN
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={tuesday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </BTN>
+        </WrapperBTN>
+      )
+    };
+    if (item.day === "wednesday") {
+      return (
+        <WrapperBTN>
+          <BTN
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={wednesday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </BTN>
+        </WrapperBTN>
+      )
+    };
+    if (item.day === "thursday") {
+      return (
+        <WrapperBTN>
+          <BTN
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={thursday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </BTN>
+        </WrapperBTN>
+      )
+    };
+    if (item.day === "friday") {
+      return (
+        <WrapperBTN>
+          <BTN
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={friday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </BTN>
+        </WrapperBTN>
+      )
+    };
+    if (item.day === "saturday") {
+      return (
+        <WrapperBTN>
+          <BTN
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={saturday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </BTN>
+        </WrapperBTN>
+      )
+    };
+    if (item.day === "sunday") {
+      return (
+        <WrapperBTN>
+          <BTN
+            id={item.day}
+            name={item.time}
+            kind_trainee={item.kind_trainee}
+            className={sunday}
+            onClick={Close}
+          >
+            {item.kind_trainee}
+          </BTN>
+        </WrapperBTN>
+      )
+    };
   };
 
   return (
@@ -395,75 +489,121 @@ const Schedule = () => {
       <WrapperDay>
         <Time>09:00</Time>
         {data0900.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>10:00</Time>
         {data1000.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>11:00</Time>
         {data1100.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>12:00</Time>
         {data1200.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>13:00</Time>
         {data1300.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>14:00</Time>
         {data1400.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>15:00</Time>
         {data1500.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>16:00</Time>
         {data1600.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>17:00</Time>
         {data1700.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>18:00</Time>
         {data1800.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>19:00</Time>
         {data1900.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
       <WrapperDay>
         <Time>20:00</Time>
         {data2000.map(item => (
-          <ChooseBTN item={item}/>
+          <ChooseBTN
+            key={item.id}
+            item={item}
+          />
         ))}
       </WrapperDay>
+      {modalOpen ?
+        <SignUp
+          Close={Close}
+          kind_trainee={kind_trainee}
+          day={day}
+          time={time}
+          date={dateClickOnBTN}
+        />
+        :
+        null}
     </>
   )
 };

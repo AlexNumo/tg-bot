@@ -119,20 +119,20 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
               );
             }}
           </Formik>
+          <div>
+            <ToastContainer
+              style={{marginTop: '55px'}}
+              position="top-left"
+              autoClose={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              theme="dark"
+            />
+        </div>
         </Dialog>
-              <div>
-        <ToastContainer
-          style={{marginTop: '55px'}}
-          position="top-left"
-          autoClose={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          theme="dark"
-        />
-      </div>
       </>
     )
   }

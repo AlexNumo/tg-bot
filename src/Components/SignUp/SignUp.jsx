@@ -121,7 +121,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           </Formik>
           <div>
             <ToastContainer
-              style={{marginTop: '55px', width: '100vw'}}
+              style={{marginTop: '55px', width: '250px'}}
               position="top-left"
               autoClose={false}
               newestOnTop={false}

@@ -29,7 +29,7 @@ const Days = styled.span`
   font-size: 8px;
   font-weight: 400;
   width: 80px;
-  color: inherit;
+  /* color: inherit; */
 `;
 
 const Time = styled.span`
@@ -37,7 +37,7 @@ const Time = styled.span`
   font-size: 8px;
   font-weight: 400;
   width: 40px;
-  color: inherit;
+  /* color: inherit; */
 `;
 
 export {

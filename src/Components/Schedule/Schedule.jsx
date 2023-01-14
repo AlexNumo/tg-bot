@@ -7,7 +7,8 @@ import {
   WrapperBTN,
   Days,
   BTN,
-  Time
+  Time,
+  WaitingWrapper
 } from './Schedule.styled';
 const Schedule = () => {
   const [data0800, setData0800] = useState([]);
@@ -468,8 +469,16 @@ const Schedule = () => {
     };
   };
 
-  return (
-    <>
+  const Waiting = () => {
+    if (data0800.length === 0) {
+      return (
+        <WaitingWrapper>
+          <h2>Інформація завантажуєтсья</h2>
+        </WaitingWrapper>
+      );
+    };
+    return (
+      <>
       <WrapperDay>
         <Time>Час</Time>
         <Days>Понеділок</Days>
@@ -604,6 +613,13 @@ const Schedule = () => {
         />
         :
         null}
+    </>
+    )
+  }
+
+  return (
+    <>
+      <Waiting/>
     </>
   )
 };

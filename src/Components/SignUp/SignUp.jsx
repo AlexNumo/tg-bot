@@ -1,6 +1,13 @@
 import { Formik } from 'formik';
 import { clientAPI } from '../../service/axios.config';
+// import * as Yup from 'yup';
+// import { useFormik } from 'formik';
 import DayOfWeek from 'Components/DayOfWeek/DayOfWeek';
+// import IMask from 'imask';
+// import InputMask from 'react-input-mask';
+import Input from 'react-phone-number-input/input';
+// import 'react-phone-number-input/style.css';
+// import PhoneInput from 'react-phone-number-input';
 import { ToastContainer } from 'react-toastify';
 import {
   Wrapper,
@@ -12,6 +19,7 @@ import { useEffect, useState } from 'react';
 
 const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [dayTranslate, setDayTranslate] = useState('');
+  const [tel, setTel] = useState('');
 
   useEffect(() => {
     const DayOfWeekTranslate = () => {
@@ -54,8 +62,6 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         </>
       )
     };
-
-    
     return (
       <>
         <Dialog>
@@ -63,7 +69,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           <h4>Будь ласка, введіть наступні дані</h4><br />
           <Formik
             initialValues={{
-              id: "",
+              id: tel,
               day_translate: dayTranslate,
               info: {
                 date: date,
@@ -88,27 +94,39 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                 handleSubmit,
               } = props;
               return (
-                <form
-                  onSubmit={handleSubmit}
-                >
+                <form onSubmit={handleSubmit}>
                   <label htmlFor="info.name">
                     Ваше ім'я
-                  </label><br/>
+                  </label><br />
                   <input
-                    id="info.name"
+                    autoFocus
+                    id="name"
                     onChange={handleChange}
+                    value={values.name}
+                    maxLength='16'
                     onBlur={handleBlur}
-                    value={values.value}
-                  /><br/>
-                  <label htmlFor="id">
+                  /><br />
+                  <label
+                  // htmlFor="id"
+                  >
                     Ваш номер телефону
-                  </label><br/>
-                  <input
-                    id="id"
-                    onChange={handleChange}
+                  </label><br />
+                  <Input
+                    // id="id"
+                    // onChange='setTel(); handleChange()'
+                    // autoFocus="autofocus"
+                    autoFocus
+
+                    maxLength='16'
+                    value={tel}
                     onBlur={handleBlur}
-                    value={values.value}
-                  /><br/>
+                    // value={values.value}
+                    onChange={setTel}
+                    // defaultCountry="UA"
+                    country="UA"
+                    international
+                    withCountryCallingCode
+                  /><br />
                   <SubBTN type="button" onClick={Close}>
                     Закрити
                   </SubBTN>
@@ -121,7 +139,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           </Formik>
           <div>
             <ToastContainer
-              style={{marginTop: '55px', width: '250px'}}
+              style={{ marginTop: '55px', marginLeft: '25px', width: '250px' }}
               position="top-left"
               autoClose={false}
               newestOnTop={false}
@@ -131,11 +149,10 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
               draggable
               theme="dark"
             />
-        </div>
+          </div>
         </Dialog>
-      </>
-    )
-  }
+      </>)
+  };
 
   return (
     <Wrapper>

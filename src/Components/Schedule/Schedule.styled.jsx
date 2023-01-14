@@ -40,10 +40,18 @@ const Time = styled.span`
   /* color: inherit; */
 `;
 
+const WaitingWrapper = styled.div`
+  display: flex;
+  margin-top: auto;
+  justify-content: center;
+  align-items: center;
+`;
+
 export {
   WrapperDay,
   WrapperBTN,
   Days,
   BTN,
-  Time
+  Time,
+  WaitingWrapper
 }

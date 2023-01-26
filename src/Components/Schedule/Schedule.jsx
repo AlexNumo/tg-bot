@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { clientAPI } from 'service/axios.config';
-import SignUp from 'Components/SignUp/SignUp';
+import SignUp from 'Components/SignUp2/SignUp';
 import moment from 'moment/moment';
 import {
   WrapperDay,
@@ -8,7 +8,10 @@ import {
   Days,
   BTN,
   Time,
-  WaitingWrapper
+  WaitingWrapper,
+  LogoPosition,
+  LogoStudio,
+  LogoSandra
 } from './Schedule.styled';
 const Schedule = () => {
   const [data0800, setData0800] = useState([]);
@@ -619,6 +622,10 @@ const Schedule = () => {
 
   return (
     <>
+      <LogoPosition>
+        <LogoStudio>Ars Fit Studio</LogoStudio>
+        <LogoSandra>by Sandrochka_strong</LogoSandra>
+      </LogoPosition>
       <Waiting/>
     </>
   )

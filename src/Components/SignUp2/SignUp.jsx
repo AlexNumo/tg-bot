@@ -1,7 +1,7 @@
-import { Formik } from 'formik';
+// import { Formik, useFormik } from 'formik';
 // import { clientAPI } from '../../service/axios.config';
 // import * as Yup from 'yup';
-// import { useFormik } from 'formik';
+import { useFormik } from 'formik';
 import DayOfWeek from 'Components/DayOfWeek/DayOfWeek';
 // import IMask from 'imask';
 // import InputMask from 'react-input-mask';
@@ -49,8 +49,28 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     };
     DayOfWeekTranslate();
   }, [day]);
-  console.log("tel: ", tel);
-  console.log("clientName: ", clientName);
+  const initialValues = {
+    id: tel,
+    day_translate: dayTranslate,
+    info: {
+      date: date,
+      day: day,
+      time: time,
+      kind_trainee: kind_trainee,
+      name: clientName,
+    }
+  };
+  const formik = useFormik({
+    initialValues,
+    onSubmit: values => {
+      // const { id, day_translate, info } = values;
+      // clientAPI.sendDataUsers(values);
+      console.log(values);
+      new Promise(resolve => setTimeout(resolve, 500));
+      alert(JSON.stringify(values, null, 2));
+    }
+  })
+
   const CheckKindTrainee = () => {
     if (kind_trainee === "-") {
       return (
@@ -69,77 +89,44 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         <Dialog>
           <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
           <h4>Будь ласка, введіть наступні дані</h4><br />
-          <Formik
-            initialValues={{
-              id: tel,
-              day_translate: dayTranslate,
-              info: {
-                date: date,
-                day: day,
-                time: time,
-                kind_trainee: kind_trainee,
-                name: clientName,
-              }
-            }}
-            onSubmit={async values => {
-              // await clientAPI.sendDataUsers(values);
-              await new Promise(resolve => setTimeout(resolve, 500));
-              alert(JSON.stringify(values, null, 2));
-            }}
-          >
-            {props => {
-              const {
-                // values,
-                isSubmitting,
-                // handleChange,
-                handleBlur,
-                handleSubmit,
-              } = props;
-              return (
-                <form onSubmit={handleSubmit}>
-                  <label
-                  // htmlFor="info.name"
-                  >
-                    Ваше ім'я
-                  </label><br />
-                  <input
-                    // type='text'
-                    id="name"
-                    autoFocus
-                    maxLength='16'
-                    // value={clientName}
-                    // onBlur={handleBlur}
-                    // onChange={(e)=>{setClientName(e.target.value)}}
-                      onChange={setClientName}
-                  /><br />
-                  <label
-                  // htmlFor="id"
-                  >
-                    Ваш номер телефону
-                  </label><br />
-                  <Input
-                    id="id"
-                    
-                    maxLength='16'
-                    value={tel}
-                    onBlur={handleBlur}
-                    // value={values.value}
-                    onChange={setTel}
-                    // defaultCountry="UA"
-                    country="UA"
-                    international
-                    withCountryCallingCode
-                  /><br />
-                  <SubBTN type="button" onClick={Close}>
-                    Закрити
-                  </SubBTN>
-                  <SubBTN type="submit" disabled={isSubmitting}>
-                    Записатися
-                  </SubBTN>
-                </form>
-              );
-            }}
-          </Formik>
+          <form onSubmit={formik.handleSubmit}>
+            <label htmlFor="name">
+              Ваше ім'я
+            </label><br />
+            <input
+              // type='text'
+              // id="name"
+              type='text'
+              maxLength='16'
+              // value={clientName}
+              onBlur={formik.handleBlur}
+              // onChange={(e)=>{setClientName(e.target.value)}}
+              onChange={setClientName}
+              // value={setClientName}
+            /><br />
+            <label htmlFor="id">
+              Ваш номер телефону
+            </label><br />
+            <Input
+              // id="id"
+              maxLength='16'
+              onBlur={formik.handleBlur}
+              value={tel}
+              // onBlur={handleBlur}
+              // value={values.value}
+              onChange={setTel}
+              // defaultCountry="UA"
+              country="UA"
+              international
+              withCountryCallingCode
+            /><br />
+            <SubBTN type="button" onClick={Close}>
+              Закрити
+            </SubBTN>
+            <SubBTN type="submit">
+              Записатися
+            </SubBTN>
+          </form>
           <div>
             <ToastContainer
               style={{ marginTop: '55px', marginLeft: '25px', width: '250px' }}

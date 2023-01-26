@@ -103,9 +103,9 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
               }
             }}
             onSubmit={async values => {
-              // await clientAPI.sendDataUsers(values);
-              await new Promise(resolve => setTimeout(resolve, 500));
-              alert(JSON.stringify(values, null, 2));
+              await clientAPI.sendDataUsers(values);
+              // await new Promise(resolve => setTimeout(resolve, 500));
+              // alert(JSON.stringify(values, null, 2));
             }}
           >
             {props => {

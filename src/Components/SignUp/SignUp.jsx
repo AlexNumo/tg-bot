@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react';
 const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [dayTranslate, setDayTranslate] = useState('');
   const [tel, setTel] = useState('');
+  const [clientName, setClientName] = useState('');
 
   useEffect(() => {
     const DayOfWeekTranslate = () => {
@@ -48,7 +49,8 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     };
     DayOfWeekTranslate();
   }, [day]);
-
+  console.log("tel: ", tel);
+  console.log("clientName: ", clientName);
   const CheckKindTrainee = () => {
     if (kind_trainee === "-") {
       return (
@@ -62,6 +64,27 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         </>
       )
     };
+    const InputClientName = ({handleBlur}) => {
+      return (
+        <>
+        <label
+      // htmlFor="info.name"
+        >
+          Ваше ім'я
+        </label><br />
+        <input
+          // type='text'
+          id="name"
+          autoFocus
+          maxLength='16'
+          // value={clientName}
+          // onBlur={handleBlur}
+          // onChange={(e)=>{setClientName(e.target.value)}}
+            onChange={setClientName}
+        /><br />
+        </>
+      )
+    }
     return (
       <>
         <Dialog>
@@ -76,47 +99,34 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                 day: day,
                 time: time,
                 kind_trainee: kind_trainee,
-                name: "",
+                name: clientName,
               }
             }}
             onSubmit={async values => {
-              await clientAPI.sendDataUsers(values);
-              // await new Promise(resolve => setTimeout(resolve, 500));
-              // alert(JSON.stringify(values, null, 2));
+              // await clientAPI.sendDataUsers(values);
+              await new Promise(resolve => setTimeout(resolve, 500));
+              alert(JSON.stringify(values, null, 2));
             }}
           >
             {props => {
               const {
-                values,
+                // values,
                 isSubmitting,
-                handleChange,
+                // handleChange,
                 handleBlur,
                 handleSubmit,
               } = props;
               return (
                 <form onSubmit={handleSubmit}>
-                  <label htmlFor="info.name">
-                    Ваше ім'я
-                  </label><br />
-                  <input
-                    autoFocus
-                    id="name"
-                    onChange={handleChange}
-                    value={values.name}
-                    maxLength='16'
-                    onBlur={handleBlur}
-                  /><br />
+                  {InputClientName(handleBlur)}
                   <label
                   // htmlFor="id"
                   >
                     Ваш номер телефону
                   </label><br />
                   <Input
-                    // id="id"
-                    // onChange='setTel(); handleChange()'
-                    // autoFocus="autofocus"
-                    autoFocus
-
+                    id="id"
+                    
                     maxLength='16'
                     value={tel}
                     onBlur={handleBlur}

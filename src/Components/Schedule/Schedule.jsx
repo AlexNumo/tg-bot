@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { clientAPI } from 'service/axios.config';
-import SignUp from 'Components/SignUp2/SignUp';
+import SignUp from 'Components/SignUp/SignUp';
 import moment from 'moment/moment';
 import {
   WrapperDay,
@@ -494,128 +494,118 @@ const Schedule = () => {
       </WrapperDay>
       <WrapperDay>
         <Time>08:00</Time>
-        {data0800.map(item => (
+        {data0800 ? data0800.map(item => (
           <ChooseBTN key={item.id} item={item}/>
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>09:00</Time>
-        {data0900.map(item => (
+        {data0900 ? data0900.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>10:00</Time>
-        {data1000.map(item => (
+        {data1000 ? data1000.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>11:00</Time>
-        {data1100.map(item => (
+        {data1100 ? data1100.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>12:00</Time>
-        {data1200.map(item => (
+        {data1200 ? data1200.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>13:00</Time>
-        {data1300.map(item => (
+        {data1300 ? data1300.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>14:00</Time>
-        {data1400.map(item => (
+        {data1400 ? data1400.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>15:00</Time>
-        {data1500.map(item => (
+        {data1500 ? data1500.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>16:00</Time>
-        {data1600.map(item => (
+        {data1600 ? data1600.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>17:00</Time>
-        {data1700.map(item => (
+        {data1700 ? data1700.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>18:00</Time>
-        {data1800.map(item => (
+        {data1800 ? data1800.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>19:00</Time>
-        {data1900.map(item => (
+        {data1900 ? data1900.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
       <WrapperDay>
         <Time>20:00</Time>
-        {data2000.map(item => (
+        {data2000 ? data2000.map(item => (
           <ChooseBTN
             key={item.id}
             item={item}
           />
-        ))}
+        )) : null}
       </WrapperDay>
-      {modalOpen ?
-        <SignUp
-          Close={Close}
-          kind_trainee={kind_trainee}
-          day={day}
-          time={time}
-          date={dateClickOnBTN}
-        />
-        :
-        null}
     </>
     )
   }
@@ -626,7 +616,17 @@ const Schedule = () => {
         <LogoStudio>Ars Fit Studio</LogoStudio>
         <LogoSandra>by Sandrochka_strong</LogoSandra>
       </LogoPosition>
-      <Waiting/>
+      <Waiting />
+      {modalOpen ?
+        <SignUp
+          Close={Close}
+          kind_trainee={kind_trainee}
+          day={day}
+          time={time}
+          date={dateClickOnBTN}
+        />
+        :
+        null}
     </>
   )
 };

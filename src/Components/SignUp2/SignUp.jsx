@@ -49,19 +49,30 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     };
     DayOfWeekTranslate();
   }, [day]);
-  const initialValues = {
-    id: tel,
-    day_translate: dayTranslate,
-    info: {
-      date: date,
-      day: day,
-      time: time,
-      kind_trainee: kind_trainee,
-      name: clientName,
-    }
+
+  const InputValueClientName = (e) => {
+    setClientName(e.target.value);
+    e.preventDefault();
   };
+
+    const InputValueTel = (e) => {
+    setTel(e.target.value);
+    e.preventDefault();
+  }
+
+  // const initialValues = {
+  //   id: tel,
+  //   day_translate: dayTranslate,
+  //   info: {
+  //     date: date,
+  //     day: day,
+  //     time: time,
+  //     kind_trainee: kind_trainee,
+  //     name: clientName,
+  //   }
+  // };
   const formik = useFormik({
-    initialValues,
+    // initialValues,
     onSubmit: values => {
       // const { id, day_translate, info } = values;
       // clientAPI.sendDataUsers(values);
@@ -71,82 +82,19 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     }
   })
 
-  const CheckKindTrainee = () => {
-    if (kind_trainee === "-") {
-      return (
-        <>
-          <Dialog>
-            <h3>Вибачте, але Ви обрали день та час на який не заплановано заняття. Будь ласка, оберіть інше тренування</h3>
-            <button type="button" onClick={Close}>
-              Закрити
-            </button>
-          </Dialog>
-        </>
-      )
-    };
-    return (
-      <>
-        <Dialog>
-          <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
-          <h4>Будь ласка, введіть наступні дані</h4><br />
-          <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="name">
-              Ваше ім'я
-            </label><br />
-            <input
-              // type='text'
-              // id="name"
-              type='text'
-              maxLength='16'
-              // value={clientName}
-              onBlur={formik.handleBlur}
-              // onChange={(e)=>{setClientName(e.target.value)}}
-              onChange={setClientName}
-              // value={setClientName}
-            /><br />
-            <label htmlFor="id">
-              Ваш номер телефону
-            </label><br />
-            <Input
-              // id="id"
-              maxLength='16'
-              onBlur={formik.handleBlur}
-              value={tel}
-              // onBlur={handleBlur}
-              // value={values.value}
-              onChange={setTel}
-              // defaultCountry="UA"
-              country="UA"
-              international
-              withCountryCallingCode
-            /><br />
-            <SubBTN type="button" onClick={Close}>
-              Закрити
-            </SubBTN>
-            <SubBTN type="submit">
-              Записатися
-            </SubBTN>
-          </form>
-          <div>
-            <ToastContainer
-              style={{ marginTop: '55px', marginLeft: '25px', width: '250px' }}
-              position="top-left"
-              autoClose={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              theme="dark"
-            />
-          </div>
-        </Dialog>
-      </>)
-  };
-
   return (
     <Wrapper>
-      <CheckKindTrainee />
+      <Dialog>
+        <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
+        <h4>Будь ласка, введіть наступні дані</h4><br />
+        <form action="">
+          <input
+            type="text"
+            value={clientName}
+            onChange={e => {setClientName(e.target.value)}}
+          />
+        </form>
+      </Dialog>
     </Wrapper>
   )
 };

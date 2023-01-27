@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const WrapperDay = styled.div`
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   /* justify-content: space-between; */
   /* width: 100px; */
   width: 100%;
@@ -61,6 +61,7 @@ const LogoPosition = styled.div`
   align-items: center;
   flex-direction: column;
   margin-bottom: 10px;
+  width: 600px;
 `;
 
 const LogoStudio = styled.p`

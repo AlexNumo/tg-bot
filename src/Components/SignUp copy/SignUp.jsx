@@ -159,7 +159,94 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
 
   return (
     <Wrapper>
-      <CheckKindTrainee />
+      <Dialog>
+          <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
+          <h4>Будь ласка, введіть наступні дані</h4><br />
+          <Formik
+            initialValues={{
+              id: tel,
+              day_translate: dayTranslate,
+              info: {
+                date: date,
+                day: day,
+                time: time,
+                kind_trainee: kind_trainee,
+                name: clientName,
+              }
+            }}
+            onSubmit={async values => {
+              // await clientAPI.sendDataUsers(values);
+              await new Promise(resolve => setTimeout(resolve, 500));
+              alert(JSON.stringify(values, null, 2));
+            }}
+          >
+            {props => {
+              const {
+                // values,
+                isSubmitting,
+                // handleChange,
+                handleBlur,
+                handleSubmit,
+              } = props;
+              return (
+                <form onSubmit={handleSubmit}>
+                  <label
+                  // htmlFor="info.name"
+                  >
+                    Ваше ім'я
+                  </label><br />
+                  <input
+                    // type='text'
+                    id="name"
+                    autoFocus
+                    maxLength='16'
+                    // value={clientName}
+                    // onBlur={handleBlur}
+                    // onChange={(e)=>{setClientName(e.target.value)}}
+                      onChange={setClientName}
+                  /><br />
+                  <label
+                  // htmlFor="id"
+                  >
+                    Ваш номер телефону
+                  </label><br />
+                  <Input
+                    id="id"
+                    
+                    maxLength='16'
+                    value={tel}
+                    onBlur={handleBlur}
+                    // value={values.value}
+                    onChange={setTel}
+                    // defaultCountry="UA"
+                    country="UA"
+                    international
+                    withCountryCallingCode
+                  /><br />
+                  <SubBTN type="button" onClick={Close}>
+                    Закрити
+                  </SubBTN>
+                  <SubBTN type="submit" disabled={isSubmitting}>
+                    Записатися
+                  </SubBTN>
+                </form>
+              );
+            }}
+          </Formik>
+          <div>
+            <ToastContainer
+              style={{ marginTop: '55px', marginLeft: '25px', width: '250px' }}
+              position="top-left"
+              autoClose={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              theme="dark"
+            />
+          </div>
+        </Dialog>
     </Wrapper>
   )
 };

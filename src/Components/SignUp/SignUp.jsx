@@ -1,13 +1,7 @@
-import { Formik } from 'formik';
-// import { clientAPI } from '../../service/axios.config';
+import { clientAPI } from '../../service/axios.config';
 // import * as Yup from 'yup';
-// import { useFormik } from 'formik';
 import DayOfWeek from 'Components/DayOfWeek/DayOfWeek';
-// import IMask from 'imask';
-// import InputMask from 'react-input-mask';
 import Input from 'react-phone-number-input/input';
-// import 'react-phone-number-input/style.css';
-// import PhoneInput from 'react-phone-number-input';
 import { ToastContainer } from 'react-toastify';
 import {
   Wrapper,
@@ -21,6 +15,17 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [dayTranslate, setDayTranslate] = useState('');
   const [tel, setTel] = useState('');
   const [clientName, setClientName] = useState('');
+  const [onSubmit, setOnSubmit] = useState({
+    id: "",
+    day_translate: "",
+    info: {
+      date: "",
+      day: "",
+      time: "",
+      kind_trainee: "",
+      name: "",
+    }
+  })
 
   useEffect(() => {
     const DayOfWeekTranslate = () => {
@@ -49,117 +54,71 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     };
     DayOfWeekTranslate();
   }, [day]);
-  console.log("tel: ", tel);
-  console.log("clientName: ", clientName);
-  const CheckKindTrainee = () => {
-    if (kind_trainee === "-") {
-      return (
-        <>
-          <Dialog>
-            <h3>Вибачте, але Ви обрали день та час на який не заплановано заняття. Будь ласка, оберіть інше тренування</h3>
-            <button type="button" onClick={Close}>
-              Закрити
-            </button>
-          </Dialog>
-        </>
-      )
-    };
-    return (
-      <>
-        <Dialog>
-          <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
-          <h4>Будь ласка, введіть наступні дані</h4><br />
-          <Formik
-            initialValues={{
-              id: tel,
-              day_translate: dayTranslate,
-              info: {
-                date: date,
-                day: day,
-                time: time,
-                kind_trainee: kind_trainee,
-                name: clientName,
-              }
-            }}
-            onSubmit={async values => {
-              // await clientAPI.sendDataUsers(values);
-              await new Promise(resolve => setTimeout(resolve, 500));
-              alert(JSON.stringify(values, null, 2));
-            }}
-          >
-            {props => {
-              const {
-                // values,
-                isSubmitting,
-                // handleChange,
-                handleBlur,
-                handleSubmit,
-              } = props;
-              return (
-                <form onSubmit={handleSubmit}>
-                  <label
-                  // htmlFor="info.name"
-                  >
-                    Ваше ім'я
-                  </label><br />
-                  <input
-                    // type='text'
-                    id="name"
-                    autoFocus
-                    maxLength='16'
-                    // value={clientName}
-                    // onBlur={handleBlur}
-                    // onChange={(e)=>{setClientName(e.target.value)}}
-                      onChange={setClientName}
-                  /><br />
-                  <label
-                  // htmlFor="id"
-                  >
-                    Ваш номер телефону
-                  </label><br />
-                  <Input
-                    id="id"
-                    
-                    maxLength='16'
-                    value={tel}
-                    onBlur={handleBlur}
-                    // value={values.value}
-                    onChange={setTel}
-                    // defaultCountry="UA"
-                    country="UA"
-                    international
-                    withCountryCallingCode
-                  /><br />
-                  <SubBTN type="button" onClick={Close}>
-                    Закрити
-                  </SubBTN>
-                  <SubBTN type="submit" disabled={isSubmitting}>
-                    Записатися
-                  </SubBTN>
-                </form>
-              );
-            }}
-          </Formik>
-          <div>
-            <ToastContainer
-              style={{ marginTop: '55px', marginLeft: '25px', width: '250px' }}
-              position="top-left"
-              autoClose={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              theme="dark"
-            />
-          </div>
-        </Dialog>
-      </>)
-  };
 
+  useEffect(() => {
+    setOnSubmit({
+      id: tel,
+      day_translate: dayTranslate,
+      info: {
+        date: date,
+        day: day,
+        time: time,
+        kind_trainee: kind_trainee,
+        name: clientName,
+    }
+    })
+  },[clientName, date, day, dayTranslate, kind_trainee, time, tel])
+
+  const HandleSubmit = (e) => {
+    const {id, day_translate, info} = onSubmit;
+    clientAPI.sendDataUsers({id, day_translate, info});
+    e.preventDefault();
+    // new Promise(resolve => setTimeout(resolve, 500));
+    // alert(JSON.stringify(onSubmit, null, 2));
+  }
   return (
     <Wrapper>
-      <CheckKindTrainee />
+      <Dialog>
+          <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
+          <h4>Будь ласка, введіть наступні дані</h4><br />
+          <form>
+            <input
+              name="name"
+              type="text"
+              maxLength='16'
+              onChange={e =>{setClientName(e.target.value)}}
+            />
+            <Input
+              name="id"
+              id="id"
+              maxLength='16'
+              value={tel}
+              onChange={setTel}
+              country="UA"
+              international
+              withCountryCallingCode
+            /><br />
+            <SubBTN type="button" onClick={Close}>
+              Закрити
+            </SubBTN>
+            <SubBTN type="submit" onClick={HandleSubmit}>
+              Записатися
+            </SubBTN>
+          </form>
+      </Dialog>
+      <div>
+        <ToastContainer
+          style={{ marginTop: '55px', marginLeft: '25px', width: '250px' }}
+          position="top-left"
+          autoClose={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          theme="dark"
+        />
+      </div>
     </Wrapper>
   )
 };

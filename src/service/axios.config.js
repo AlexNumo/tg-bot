@@ -37,7 +37,6 @@ export const getDataALL = async () => {
 export const sendDataUsers = async ({ id, day_translate, info }) => {
   try {
     const res = await instanceClientAPI.post(`/tgbot`, { id, info });
-    console.log(day_translate);
     ToastInfo({day_translate, info});
     return res;
   } catch (e) {

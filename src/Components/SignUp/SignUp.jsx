@@ -18,6 +18,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [clientName, setClientName] = useState('');
   const [currentErrorName, setCurrentErrorName] = useState('');
   const [currentErrorTel, setCurrentErrorTel] = useState('');
+  const [validForm, setValidForm] = useState(false);
   const [onSubmit, setOnSubmit] = useState({
     id: "",
     day_translate: "",
@@ -83,34 +84,41 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     id: yup.string()
       .min(13, "Номер телефону має містити 13 символів")
       .max(13, "Номер телефону має містити 13 символів")
-      .required("Номер телефону обов'язкове до заповнення"),
+      .required("Номер телефону обов'язковий до заповнення"),
   });
 
-  const validateUserName = () => {
-    const name = clientName;
+  const validateUserName = (e) => {
+    const name = e.target.value;
+    setClientName(name);
     userName.validate({ name: name })
       .catch((err) => {
         setCurrentErrorName(err.errors);
+        setValidForm(false);
       });
     userName.isValid({ name: name })
       .then(function (valid) {
         if (valid === true) {
           setCurrentErrorName('');
+          setValidForm(true);
           return;
         }
       })
   };
 
-  const ValidateUserID = () => {
-    const userID = tel;
+  const ValidateUserID = (e) => {
+    const userID = e;
+    setTel(e);
+    console.log(e);
     userTel.validate({ id: userID })
       .catch((err) => {
         setCurrentErrorTel(err.errors);
+        setValidForm(false);
       });
     userTel.isValid({ id: userID })
       .then(function (valid) {
         if (valid === true) {
-          setCurrentErrorTel('')
+          setCurrentErrorTel('');
+          setValidForm(true);
           return;
         }
       })
@@ -118,14 +126,16 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   
   const HandleSubmit = (e) => {
     e.preventDefault();
-    validateUserName();
-    ValidateUserID();
-    if (currentErrorName === "" & currentErrorTel === "") {
+    if (validForm === true) {
+      console.log(validForm)
       const { id, day_translate, info } = onSubmit;
-    clientAPI.sendDataUsers({id, day_translate, info});
+      clientAPI.sendDataUsers({ id, day_translate, info });
+      console.log(onSubmit)
       // new Promise(resolve => setTimeout(resolve, 500));
       // alert(JSON.stringify(onSubmit, null, 2));
+      return;
     }
+    return;
   }
   
   return (
@@ -139,7 +149,8 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
             <input
               name="name"
               type="text"
-              onChange={e =>{setClientName(e.target.value)}}
+              // onChange={e =>{setClientName(e.target.value)}}
+            onChange={validateUserName}
           /><br />
           <div>
             {currentErrorName ?
@@ -155,7 +166,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
               name="id"
               id="id"
               value={tel}
-              onChange={setTel}
+              onChange={ValidateUserID}
               country="UA"
               international
               withCountryCallingCode
@@ -169,7 +180,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
             <SubBTN type="button" onClick={Close}>
               Закрити
             </SubBTN>
-            <SubBTN type="submit" onClick={HandleSubmit}>
+            <SubBTN type="submit" onClick={HandleSubmit} disabled={!validForm}>
               Записатися
             </SubBTN>
           </form>

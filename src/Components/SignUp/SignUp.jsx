@@ -11,7 +11,6 @@ import {
 import { useEffect, useState } from 'react';
 import * as yup from 'yup';
 
-
 const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [dayTranslate, setDayTranslate] = useState('');
   const [tel, setTel] = useState('');
@@ -82,6 +81,8 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     return (setValidForm(false));
   }, [validFormName, validFormTel]);
 
+  console.log(kind_trainee)
+
   const userName = yup.object({
     name: yup.string()
       .min(3, "Ім'я може містити мінімум 3 символи")
@@ -117,7 +118,6 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const ValidateUserID = (e) => {
     const userID = e;
     setTel(e);
-    console.log(e);
     userTel.validate({ id: userID })
       .catch((err) => {
         setCurrentErrorTel(err.errors);
@@ -136,63 +136,74 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (validForm === true) {
-      console.log(validForm)
       const { id, day_translate, info } = onSubmit;
+      // const  = info.day;
       clientAPI.sendDataUsers({ id, day_translate, info });
-      console.log(onSubmit)
+      clientAPI.sendTgRecord({id, day_translate, clientName, kind_trainee, time, date});
       // new Promise(resolve => setTimeout(resolve, 500));
       // alert(JSON.stringify(onSubmit, null, 2));
       return;
     }
     return;
-  }
-  
+  };
+
   return (
     <Wrapper>
       <Dialog>
+        {kind_trainee ?
+        <>  
           <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
           <h4>Будь ласка, введіть наступні дані</h4><br />
-        <form>
-          <label htmlFor="name">
-            Ім'я:</label><br />
-            <input
-              name="name"
-              type="text"
-              // onChange={e =>{setClientName(e.target.value)}}
-            onChange={validateUserName}
-          /><br />
-          <div>
-            {currentErrorName ?
-              <div style={{ color: "red", width: "180px" }}>
-                <p style={{ fontSize: "14px" }}>{currentErrorName}</p>
-              </div> :
-              null
-            }
-          </div>
-          <label htmlFor="id">
-            Номер телефону:</label><br />
-            <Input
-              name="id"
-              id="id"
-              value={tel}
-              onChange={ValidateUserID}
-              country="UA"
-              international
-              withCountryCallingCode
-          /><br />
-            {currentErrorTel ?
-              <div style={{ color: "red", width: "180px" }}>
-                <p style={{ fontSize: "14px" }}>{currentErrorTel}</p>
-              </div> :
-              null
-            }
+          <form>
+            <label htmlFor="name">
+              Ім'я:</label><br />
+              <input
+                name="name"
+                type="text"
+                // onChange={e =>{setClientName(e.target.value)}}
+              onChange={validateUserName}
+            /><br />
+            <div>
+              {currentErrorName ?
+                <div style={{ color: "red", width: "180px" }}>
+                  <p style={{ fontSize: "14px" }}>{currentErrorName}</p>
+                </div> :
+                null
+              }
+            </div>
+            <label htmlFor="id">
+              Номер телефону:</label><br />
+              <Input
+                name="id"
+                id="id"
+                value={tel}
+                onChange={ValidateUserID}
+                country="UA"
+                international
+                withCountryCallingCode
+            /><br />
+              {currentErrorTel ?
+                <div style={{ color: "red", width: "180px" }}>
+                  <p style={{ fontSize: "14px" }}>{currentErrorTel}</p>
+                </div> :
+                null
+              }
+              <SubBTN type="button" onClick={Close}>
+                Закрити
+              </SubBTN>
+              <SubBTN type="submit" onClick={HandleSubmit} disabled={!validForm}>
+                Записатися
+            </SubBTN>
+            </form>
+          </>
+          :
+          <>
+            <p>Ви обрали час на який не заплановано заняття. Будь ласка, оберіть інший час</p>
             <SubBTN type="button" onClick={Close}>
               Закрити
             </SubBTN>
-            <SubBTN type="submit" onClick={HandleSubmit} disabled={!validForm}>
-              Записатися
-            </SubBTN>
-          </form>
+          </>}
+        
       </Dialog>
       <div>
         <ToastContainer

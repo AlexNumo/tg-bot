@@ -357,6 +357,15 @@ const Schedule = () => {
         setDateClickOnBTN('')
       ];
     }
+    if (e.target.outerText === "-") {
+      return[
+      setModalOpen(true),
+      setKind_trainee(""),
+      setDay(e.target.id),
+      setTime(e.target.name),
+      setDateClickOnBTN(e.target.className),
+      ]
+    }
     setModalOpen(true);
     setKind_trainee(e.target.outerText);
     setDay(e.target.id);

@@ -53,6 +53,7 @@ const WaitingWrapper = styled.div`
   margin-top: auto;
   justify-content: center;
   align-items: center;
+  width: 697px;
 `;
 
 const LogoPosition = styled.div`

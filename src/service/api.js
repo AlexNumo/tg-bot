@@ -12,7 +12,7 @@ const instance = axios.create({
 const tgSandra = axios.create({
   // baseURL: 'https://sandra-back-render.onrender.com/',
   // https://api.telegram.org/bot6096389512:AAEqOmZLflg5D-zito8B7Uk0COTOTySqKxI/sendMessage?chat_id=525427019&text=
-  baseURL: 'https://api.telegram.org/bot6096389512:AAEqOmZLflg5D-zito8B7Uk0COTOTySqKxI/sendMessage?chat_id=525427019&text=',
+  baseURL: 'https://api.telegram.org/bot6096389512:AAEqOmZLflg5D-zito8B7Uk0COTOTySqKxI/sendMessage?chat_id=163995726&text=',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 const Dialog = styled.div`
   position: relative;
   width: 250px;
-  height: 300px;
+  height: 350px;
   margin: auto;
   padding-top: 25px;
   /* margin-left: auto;
@@ -21,6 +21,7 @@ const Dialog = styled.div`
   margin-right: auto; */
   padding-left: 20px;
   border: 3px solid;
+  border-radius: 12px;
   background-color: #9cda9e;
 `;
 

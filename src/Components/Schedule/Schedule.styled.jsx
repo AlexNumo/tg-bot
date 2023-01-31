@@ -5,7 +5,7 @@ const WrapperDay = styled.div`
   /* justify-content: space-around; */
   /* justify-content: space-between; */
   /* width: 100px; */
-  width: 100%;
+  width: 697px;
 `;
 
 const WrapperBTN = styled.div`

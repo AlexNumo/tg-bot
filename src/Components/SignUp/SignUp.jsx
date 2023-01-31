@@ -1,5 +1,4 @@
 import { clientAPI } from '../../service/axios.config';
-// import * as Yup from 'yup';
 import DayOfWeek from 'Components/DayOfWeek/DayOfWeek';
 import Input from 'react-phone-number-input/input';
 import { ToastContainer } from 'react-toastify';
@@ -10,11 +9,15 @@ import {
   SubBTN,
 } from './SignUp.styled';
 import { useEffect, useState } from 'react';
+import * as yup from 'yup';
+
 
 const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [dayTranslate, setDayTranslate] = useState('');
   const [tel, setTel] = useState('');
   const [clientName, setClientName] = useState('');
+  const [currentErrorName, setCurrentErrorName] = useState('');
+  const [currentErrorTel, setCurrentErrorTel] = useState('');
   const [onSubmit, setOnSubmit] = useState({
     id: "",
     day_translate: "",
@@ -69,35 +72,100 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     })
   },[clientName, date, day, dayTranslate, kind_trainee, time, tel])
 
+  const userName = yup.object({
+    name: yup.string()
+      .min(3, "Ім'я може містити мінімум 3 символи")
+      .max(15, "Ім'я може містити максимум 15 символів")
+      .required("Ім'я обов'язкове до заповнення"),
+  });
+
+  const userTel = yup.object({
+    id: yup.string()
+      .min(13, "Номер телефону має містити 13 символів")
+      .max(13, "Номер телефону має містити 13 символів")
+      .required("Номер телефону обов'язкове до заповнення"),
+  });
+
+  const validateUserName = () => {
+    const name = clientName;
+    userName.validate({ name: name })
+      .catch((err) => {
+        setCurrentErrorName(err.errors);
+      });
+    userName.isValid({ name: name })
+      .then(function (valid) {
+        if (valid === true) {
+          setCurrentErrorName('');
+          return;
+        }
+      })
+  };
+
+  const ValidateUserID = () => {
+    const userID = tel;
+    userTel.validate({ id: userID })
+      .catch((err) => {
+        setCurrentErrorTel(err.errors);
+      });
+    userTel.isValid({ id: userID })
+      .then(function (valid) {
+        if (valid === true) {
+          setCurrentErrorTel('')
+          return;
+        }
+      })
+  };  
+  
   const HandleSubmit = (e) => {
-    const {id, day_translate, info} = onSubmit;
-    clientAPI.sendDataUsers({id, day_translate, info});
     e.preventDefault();
-    // new Promise(resolve => setTimeout(resolve, 500));
-    // alert(JSON.stringify(onSubmit, null, 2));
+    validateUserName();
+    ValidateUserID();
+    if (currentErrorName === "" & currentErrorTel === "") {
+      const { id, day_translate, info } = onSubmit;
+    clientAPI.sendDataUsers({id, day_translate, info});
+      // new Promise(resolve => setTimeout(resolve, 500));
+      // alert(JSON.stringify(onSubmit, null, 2));
+    }
   }
+  
   return (
     <Wrapper>
       <Dialog>
           <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
           <h4>Будь ласка, введіть наступні дані</h4><br />
-          <form>
+        <form>
+          <label htmlFor="name">
+            Ім'я:</label><br />
             <input
               name="name"
               type="text"
-              maxLength='16'
               onChange={e =>{setClientName(e.target.value)}}
-            />
+          /><br />
+          <div>
+            {currentErrorName ?
+              <div style={{ color: "red", width: "180px" }}>
+                <p style={{ fontSize: "14px" }}>{currentErrorName}</p>
+              </div> :
+              null
+            }
+          </div>
+          <label htmlFor="id">
+            Номер телефону:</label><br />
             <Input
               name="id"
               id="id"
-              maxLength='16'
               value={tel}
               onChange={setTel}
               country="UA"
               international
               withCountryCallingCode
-            /><br />
+          /><br />
+            {currentErrorTel ?
+              <div style={{ color: "red", width: "180px" }}>
+                <p style={{ fontSize: "14px" }}>{currentErrorTel}</p>
+              </div> :
+              null
+            }
             <SubBTN type="button" onClick={Close}>
               Закрити
             </SubBTN>

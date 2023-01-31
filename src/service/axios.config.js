@@ -27,7 +27,6 @@ export const getData = async ({id}) => {
 export const getDataALL = async () => {
   try {
     const result = await instanceClientAPI.get(`/api`);
-    // console.log(result)
     return result.data;
   } catch (error) {
     toast.error('Упс, щось пішло не так');

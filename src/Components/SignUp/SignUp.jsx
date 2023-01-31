@@ -19,6 +19,8 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [currentErrorName, setCurrentErrorName] = useState('');
   const [currentErrorTel, setCurrentErrorTel] = useState('');
   const [validForm, setValidForm] = useState(false);
+  const [validFormName, setValidFormName] = useState(false);
+  const [validFormTel, setValidFormTel] = useState(false);
   const [onSubmit, setOnSubmit] = useState({
     id: "",
     day_translate: "",
@@ -69,9 +71,16 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         time: time,
         kind_trainee: kind_trainee,
         name: clientName,
-    }
+      }
     })
-  },[clientName, date, day, dayTranslate, kind_trainee, time, tel])
+  }, [clientName, date, day, dayTranslate, kind_trainee, time, tel]);
+
+  useEffect(() => {
+    if (validFormName === true & validFormTel === true) {
+      return (setValidForm(true));
+    }
+    return (setValidForm(false));
+  }, [validFormName, validFormTel]);
 
   const userName = yup.object({
     name: yup.string()
@@ -93,13 +102,13 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     userName.validate({ name: name })
       .catch((err) => {
         setCurrentErrorName(err.errors);
-        setValidForm(false);
+        setValidFormName(false);
       });
     userName.isValid({ name: name })
       .then(function (valid) {
         if (valid === true) {
           setCurrentErrorName('');
-          setValidForm(true);
+          setValidFormName(true);
           return;
         }
       })
@@ -112,13 +121,13 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     userTel.validate({ id: userID })
       .catch((err) => {
         setCurrentErrorTel(err.errors);
-        setValidForm(false);
+        setValidFormTel(false);
       });
     userTel.isValid({ id: userID })
       .then(function (valid) {
         if (valid === true) {
           setCurrentErrorTel('');
-          setValidForm(true);
+          setValidFormTel(true);
           return;
         }
       })

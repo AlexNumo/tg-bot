@@ -17,12 +17,9 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [clientName, setClientName] = useState('');
   const [currentErrorName, setCurrentErrorName] = useState('');
   const [currentErrorTel, setCurrentErrorTel] = useState('');
-  const [currentErrorInsta, setCurrentErrorInsta] = useState('');
-  const [instaNickName, setInstaNickName] = useState('@');
   const [validForm, setValidForm] = useState(false);
   const [validFormName, setValidFormName] = useState(false);
   const [validFormTel, setValidFormTel] = useState(false);
-  const [validFormInsta, setValidFormInsta] = useState(false);
   const [onSubmit, setOnSubmit] = useState({
     id: "",
     day_translate: "",
@@ -32,7 +29,6 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
       time: "",
       kind_trainee: "",
       name: "",
-      instaNickName: ""
     }
   })
 
@@ -74,24 +70,23 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         time: time,
         kind_trainee: kind_trainee,
         name: clientName,
-        instaNickName: instaNickName
       }
     })
-  }, [clientName, date, day, dayTranslate, kind_trainee, time, tel, instaNickName]);
+  }, [clientName, date, day, dayTranslate, kind_trainee, time, tel]);
 
   useEffect(() => {
-    if (validFormName === true & validFormTel === true & validFormInsta === true) {
+    if (validFormName === true & validFormTel === true) {
       return (setValidForm(true));
     }
     return (setValidForm(false));
-  }, [validFormName, validFormTel, validFormInsta]);
+  }, [validFormName, validFormTel]);
 
-  // console.log(kind_trainee)
+  console.log(kind_trainee)
 
   const userName = yup.object({
     name: yup.string()
       .min(3, "Ім'я може містити мінімум 3 символи")
-      .max(25, "Ім'я може містити максимум 25 символів")
+      .max(15, "Ім'я може містити максимум 15 символів")
       .required("Ім'я обов'язкове до заповнення"),
   });
 
@@ -100,13 +95,6 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
       .min(13, "Номер телефону має містити 13 символів")
       .max(13, "Номер телефону має містити 13 символів")
       .required("Номер телефону обов'язковий до заповнення"),
-  });
-
-    const userInsta = yup.object({
-    instaNickName: yup.string()
-      .min(3, "Nickname може містити мінімум 3 символи")
-      .max(25, "Nickname може містити максимум 25 символів")
-      .required("Nickname обов'язкове до заповнення"),
   });
 
   const validateUserName = (e) => {
@@ -143,44 +131,21 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           return;
         }
       })
-  };
-
-  const validateUserInsta = (e) => {
-    const nickname = e.target.value;
-    // console.log(nickname)
-    setInstaNickName(nickname)
-    userInsta.validate({ instaNickName: nickname })
-      .catch((err) => {
-        // console.log(instaNickName);
-        setCurrentErrorInsta(err.errors);
-        setValidFormInsta(false);
-      });
-    userInsta.isValid({ instaNickName: nickname })
-      .then(function (valid) {
-        // console.log(instaNickName)
-        if (valid === true) {
-          setCurrentErrorInsta('');
-          setValidFormInsta(true);
-          return;
-        }
-      })
-  };
+  };  
   
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (validForm === true) {
       const { id, day_translate, info } = onSubmit;
       // const  = info.day;
-      clientAPI.sendDataUsers({ id, day_translate, info }).then(setValidForm(false));
-      clientAPI.sendTgRecord({id, day_translate, clientName, kind_trainee, time, date, instaNickName});
+      clientAPI.sendDataUsers({ id, day_translate, info });
+      clientAPI.sendTgRecord({id, day_translate, clientName, kind_trainee, time, date});
       // new Promise(resolve => setTimeout(resolve, 500));
       // alert(JSON.stringify(onSubmit, null, 2));
       return;
     }
     return;
   };
-
-  // console.log(instaNickName)
 
   return (
     <Wrapper>
@@ -191,7 +156,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           <h4>Будь ласка, введіть наступні дані</h4><br />
           <form>
             <label htmlFor="name">
-              Прізвище та ім'я:</label><br />
+              Ім'я:</label><br />
               <input
                 name="name"
                 type="text"
@@ -202,23 +167,6 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
               {currentErrorName ?
                 <div style={{ color: "red", width: "180px" }}>
                   <p style={{ fontSize: "14px" }}>{currentErrorName}</p>
-                </div> :
-                null
-              }
-              </div>
-            <label htmlFor="nick-name">
-              Nickname on Instagram:</label><br />
-              <input
-                name="nick-name"
-                type="text"
-                // onChange={e => { setInstaNickName(e.target.value) }}
-                value={instaNickName}
-                onChange={validateUserInsta}
-            /><br />
-            <div>
-              {currentErrorInsta ?
-                <div style={{ color: "red", width: "180px" }}>
-                  <p style={{ fontSize: "14px" }}>{currentErrorInsta}</p>
                 </div> :
                 null
               }

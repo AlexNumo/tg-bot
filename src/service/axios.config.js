@@ -67,13 +67,9 @@ export const getDataALLUsers = async () => {
   }
 };
 
-const sendTgRecord = async ({id, day_translate, clientName, kind_trainee, time, date, instaNickName}) => {
+const sendTgRecord = async ({id, day_translate, clientName, kind_trainee, time, date}) => {
   try {
-    // const instaNickNameConvertation =
-    // instaNickName.substring(1);
-    const urlInsta = `https://www.instagram.com/${instaNickName.substring(1)}/`
-    // https://www.instagram.com/koksik839/
-    const res = await tgSandra.post(`Записався клієнт ${clientName} на тренування ${kind_trainee} в ${day_translate} о ${time}. Номер телефону клієнта ${id}, дата тренування: ${date}, Instagram: ${urlInsta}`,);
+    const res = await tgSandra.post(`Записався клієнт ${clientName} на тренування ${kind_trainee} в ${day_translate} о ${time}. Номер телефону клієнта ${id}, дата тренування: ${date}`,);
     return res;
   } catch (e) {
       toast.error('Щось пішло не так');

@@ -6,6 +6,12 @@ const WrapperDay = styled.div`
   /* justify-content: space-between; */
   /* width: 100px; */
   width: 697px;
+  @media (prefers-color-scheme: light){
+    color: black !important;
+  }
+  @media (prefers-color-scheme: dark){
+    color: #ffffff !important;
+  }
 `;
 
 const WrapperBTN = styled.div`

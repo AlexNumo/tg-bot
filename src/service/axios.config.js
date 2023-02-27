@@ -88,9 +88,8 @@ const sendTgRecord = async ({id, day_translate, clientName, kind_trainee, time, 
     // instaNickName.substring(1);
     const urlInsta = `https://www.instagram.com/${instaNickName.substring(1)}/`
     // https://www.instagram.com/koksik839/
-    const res1 = await tgSandra.post(`163995726&text=Записався клієнт ${clientName} на тренування ${kind_trainee} в ${day_translate} о ${time}. Номер телефону клієнта ${id}, дата тренування: ${date}, Instagram: ${urlInsta}`,);
-    const res2 = await tgSandra.post(`525427019&text=Записався клієнт ${clientName} на тренування ${kind_trainee} в ${day_translate} о ${time}. Номер телефону клієнта ${id}, дата тренування: ${date}, Instagram: ${urlInsta}`,);
-    return [res1, res2];
+    const res = await tgSandra.post(`Записався клієнт ${clientName} на тренування ${kind_trainee} в ${day_translate} о ${time}. Номер телефону клієнта ${id}, дата тренування: ${date}, Instagram: ${urlInsta}`,);
+    return res;
   } catch (e) {
       toast.error('Щось пішло не так');
   }

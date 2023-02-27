@@ -57,6 +57,18 @@ export const deleteDataUsers = async ({id}) => {
   }
 };
 
+export const findDataUsers = async (id) => {
+  console.log(id)
+  try {
+    const result = await instance.get(`/tgbot/find`, id);
+    // console.log(result.data)
+    return result;
+  } catch (error) {
+    toast.error('Упс, щось пішло не так');
+    console.error(error.message);
+  }
+};
+
 export const getDataALLUsers = async () => {
   try {
     const result = await instance.get(`/tgbot`);
@@ -87,5 +99,6 @@ export const clientAPI = {
   sendDataUsers,
   deleteDataUsers,
   getDataALLUsers,
-  sendTgRecord
+  sendTgRecord,
+  findDataUsers
 };

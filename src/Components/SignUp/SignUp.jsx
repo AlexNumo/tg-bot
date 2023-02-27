@@ -23,6 +23,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [validFormName, setValidFormName] = useState(false);
   const [validFormTel, setValidFormTel] = useState(false);
   const [validFormInsta, setValidFormInsta] = useState(false);
+  // const [findUserByID, setFindUserByID] = useState('');
   const [onSubmit, setOnSubmit] = useState({
     id: "",
     day_translate: "",
@@ -180,7 +181,22 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     return;
   };
 
-  // console.log(instaNickName)
+  // useEffect(()=>{
+  //   const res = async () => { 
+  //     const find = await clientAPI.findDataUsers({id: '+380633576239'});
+  //     return find;
+  //     // return setFindUserByID(find);
+  //   };
+  //   res();
+  // },[])
+
+  // const HandleFindNumber = (e) =>{
+  //   console.log(e.target.value)
+  //   // const res = clientAPI.findDataUsers({id: '+380633576239'});
+  //   // setFindUserByID(res)
+  // }
+
+  // console.log(findUserByID)
 
   return (
     <Wrapper>
@@ -189,6 +205,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         <>  
           <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
           <h4>Будь ласка, введіть наступні дані</h4><br />
+          {/* <input type="text" onChange={HandleFindNumber}/> */}
           <form>
             <label htmlFor="name">
               Прізвище та ім'я:</label><br />
@@ -196,7 +213,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                 name="name"
                 type="text"
                 // onChange={e =>{setClientName(e.target.value)}}
-              onChange={validateUserName}
+                onChange={validateUserName}
             /><br />
             <div>
               {currentErrorName ?

@@ -64,7 +64,6 @@ export const findDataUsers = async (id) => {
     // console.log(result.data)
     return result.data;
   } catch (error) {
-    toast.error('Упс, щось пішло не так');
     console.error(error.message);
   }
 };

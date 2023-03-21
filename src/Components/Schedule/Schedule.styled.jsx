@@ -29,8 +29,9 @@ const BTN = styled.button`
   height: 30px;
   margin: 2px;
   padding: 2px;
-  color: black;
+  color: black !important;
   background-color: #f4c2c2;
+  border-radius: 22px;
 `;
 
 const Days = styled.span`

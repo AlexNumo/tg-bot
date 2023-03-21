@@ -1,14 +1,16 @@
-import styled, { keyframes } from 'styled-components';
+import styled, {
+  // keyframes
+} from 'styled-components';
 
-const myAnim = keyframes`
-	0% {
-		transform: scale(2);
-	}
+// const myAnim = keyframes`
+// 	0% {
+// 		transform: scale(2);
+// 	}
 
-	100% {
-		transform: scale(1);
-	}
-`;
+// 	100% {
+// 		transform: scale(1);
+// 	}
+// `;
 
 const Wrapper = styled.div`
   position: absolute;
@@ -34,7 +36,7 @@ const Dialog = styled.div`
   border-radius: 12px;
   margin-top: 25px;
   background: #f4c2c2;
-  animation: ${myAnim} 0.5s ease 0s 1 normal forwards;
+  /* animation: {myAnim} 0.5s ease 0s 1 normal forwards; */
 `;
 
 const KindStyle = styled.span`

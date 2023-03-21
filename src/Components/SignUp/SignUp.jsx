@@ -18,12 +18,12 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [currentErrorName, setCurrentErrorName] = useState('');
   const [currentErrorTel, setCurrentErrorTel] = useState('');
   const [currentErrorInsta, setCurrentErrorInsta] = useState('');
-  const [instaNickName, setInstaNickName] = useState('@');
+  const [instaNickName, setInstaNickName] = useState('');
   const [validForm, setValidForm] = useState(false);
   const [validFormName, setValidFormName] = useState(false);
   const [validFormTel, setValidFormTel] = useState(false);
   const [validFormInsta, setValidFormInsta] = useState(false);
-  // const [findUserByID, setFindUserByID] = useState('');
+  const [findUserByID, setFindUserByID] = useState('');
   const [onSubmit, setOnSubmit] = useState({
     id: "",
     day_translate: "",
@@ -64,7 +64,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     };
     DayOfWeekTranslate();
   }, [day]);
-
+  // console.log(findUserByID)
   useEffect(() => {
     setOnSubmit({
       id: tel,
@@ -74,18 +74,21 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         day: day,
         time: time,
         kind_trainee: kind_trainee,
-        name: clientName,
-        instaNickName: instaNickName
+        name: clientName ? clientName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].name : ''),
+        instaNickName: instaNickName ? instaNickName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].instaNickName : ''),
       }
     })
-  }, [clientName, date, day, dayTranslate, kind_trainee, time, tel, instaNickName]);
+  }, [clientName, date, day, dayTranslate, kind_trainee, time, tel, instaNickName, findUserByID]);
 
   useEffect(() => {
     if (validFormName === true & validFormTel === true & validFormInsta === true) {
       return (setValidForm(true));
     }
+    if (findUserByID) {
+      return (setValidForm(true));
+    }
     return (setValidForm(false));
-  }, [validFormName, validFormTel, validFormInsta]);
+  }, [validFormName, validFormTel, validFormInsta, findUserByID]);
 
   // console.log(kind_trainee)
 
@@ -171,7 +174,6 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     e.preventDefault();
     if (validForm === true) {
       const { id, day_translate, info } = onSubmit;
-      // const  = info.day;
       clientAPI.sendDataUsers({ id, day_translate, info }).then(setValidForm(false));
       clientAPI.sendTgRecord({id, day_translate, clientName, kind_trainee, time, date, instaNickName});
       // new Promise(resolve => setTimeout(resolve, 500));
@@ -181,24 +183,14 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     return;
   };
 
-  // useEffect(()=>{
-  //   const res = async () => { 
-  //     const find = await clientAPI.findDataUsers(findUserByID);
-  //     return find;
-  //     // return setFindUserByID(find);
-  //   };
-  //   res();
-  // },[])
-
-  // const HandleFindNumber = (e) =>{
-  //   console.log(e.target.value)
-  //   // const send = { id: '+380633576239' }
-  //   // const res = clientAPI.findDataUsers(send);
-  //   // console.log(res)
-  //   setFindUserByID(e.target.value)
-  // }
-
-  // console.log(findUserByID)
+  useEffect(() => {
+    const findingTel = {id: tel}
+    const res = async () => { 
+      const find = await clientAPI.findDataUsers(findingTel);
+      return setFindUserByID(find);
+    };
+    res();
+  },[tel])
 
   return (
     <Wrapper>
@@ -209,39 +201,6 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           <h4>Будь ласка, введіть наступні дані</h4><br />
           {/* <input type="text" onChange={HandleFindNumber}/> */}
           <form>
-            <label htmlFor="name">
-              Прізвище та ім'я:</label><br />
-              <input
-                name="name"
-                type="text"
-                // onChange={e =>{setClientName(e.target.value)}}
-                onChange={validateUserName}
-            /><br />
-            <div>
-              {currentErrorName ?
-                <div style={{ color: "red", width: "180px" }}>
-                  <p style={{ fontSize: "14px" }}>{currentErrorName}</p>
-                </div> :
-                null
-              }
-              </div>
-            <label htmlFor="nick-name">
-              Nickname on Instagram:</label><br />
-              <input
-                name="nick-name"
-                type="text"
-                // onChange={e => { setInstaNickName(e.target.value) }}
-                value={instaNickName}
-                onChange={validateUserInsta}
-            /><br />
-            <div>
-              {currentErrorInsta ?
-                <div style={{ color: "red", width: "180px" }}>
-                  <p style={{ fontSize: "14px" }}>{currentErrorInsta}</p>
-                </div> :
-                null
-              }
-            </div>
             <label htmlFor="id">
               Номер телефону:</label><br />
               <Input
@@ -259,6 +218,42 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                 </div> :
                 null
               }
+              {findUserByID ? null :
+                <>
+                  <label htmlFor="name">
+                    Прізвище та ім'я:</label><br />
+                    <input
+                      name="name"
+                      type="text"
+                      // onChange={e =>{setClientName(e.target.value)}}
+                      onChange={validateUserName}
+                  /><br />
+                    <div>
+                      {currentErrorName ?
+                        <div style={{ color: "red", width: "180px" }}>
+                          <p style={{ fontSize: "14px" }}>{currentErrorName}</p>
+                        </div> :
+                        null
+                      }
+                      </div>
+                    <label htmlFor="nick-name">
+                      Nickname on Instagram:</label><br />
+                      <input
+                        name="nick-name"
+                        type="text"
+                        // onChange={e => { setInstaNickName(e.target.value) }}
+                        value={instaNickName}
+                        onChange={validateUserInsta}
+                    /><br />
+                    <div>
+                      {currentErrorInsta ?
+                        <div style={{ color: "red", width: "180px" }}>
+                          <p style={{ fontSize: "14px" }}>{currentErrorInsta}</p>
+                        </div> :
+                        null
+                      }
+                    </div>
+                  </>}
               <SubBTN type="button" onClick={Close}>
                 Закрити
               </SubBTN>

@@ -58,11 +58,11 @@ export const deleteDataUsers = async ({id}) => {
 };
 
 export const findDataUsers = async (id) => {
-  console.log(id)
+  // console.log(id)
   try {
     const result = await instance.put(`/tgbot/find`, id);
-    console.log(result.data)
-    return result;
+    // console.log(result.data)
+    return result.data;
   } catch (error) {
     toast.error('Упс, щось пішло не так');
     console.error(error.message);

@@ -361,16 +361,16 @@ const Schedule = () => {
       return[
       setModalOpen(true),
       setKind_trainee(""),
-      setDay(e.target.id),
-      setTime(e.target.name),
-      setDateClickOnBTN(e.target.className),
+      setDay(''),
+      setTime(''),
+      setDateClickOnBTN(''),
       ]
     }
     setModalOpen(true);
-    setKind_trainee(e.target.outerText);
+    setKind_trainee(e.target.dataset.kind_trainee);
     setDay(e.target.id);
-    setTime(e.target.name);
-    setDateClickOnBTN(e.target.className);
+    setTime(e.target.dataset.name);
+    setDateClickOnBTN(e.target.dataset.date);
   };
 
   const ChooseBTN = ({ item }) => {
@@ -379,9 +379,9 @@ const Schedule = () => {
         <WrapperBTN>
           <BTN
             id={item.day}
-            name={item.time}
-            kind_trainee={item.kind_trainee}
-            className={monday}
+            data-name={item.time}
+            data-kind_trainee={item.kind_trainee}
+            data-date={monday}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -394,9 +394,9 @@ const Schedule = () => {
         <WrapperBTN>
           <BTN
             id={item.day}
-            name={item.time}
-            kind_trainee={item.kind_trainee}
-            className={tuesday}
+            data-name={item.time}
+            data-kind_trainee={item.kind_trainee}
+            data-date={tuesday}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -409,9 +409,9 @@ const Schedule = () => {
         <WrapperBTN>
           <BTN
             id={item.day}
-            name={item.time}
-            kind_trainee={item.kind_trainee}
-            className={wednesday}
+            data-name={item.time}
+            data-kind_trainee={item.kind_trainee}
+            data-date={wednesday}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -424,9 +424,9 @@ const Schedule = () => {
         <WrapperBTN>
           <BTN
             id={item.day}
-            name={item.time}
-            kind_trainee={item.kind_trainee}
-            className={thursday}
+            data-name={item.time}
+            data-kind_trainee={item.kind_trainee}
+            data-date={thursday}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -439,9 +439,9 @@ const Schedule = () => {
         <WrapperBTN>
           <BTN
             id={item.day}
-            name={item.time}
-            kind_trainee={item.kind_trainee}
-            className={friday}
+            data-name={item.time}
+            data-kind_trainee={item.kind_trainee}
+            data-date={friday}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -454,9 +454,9 @@ const Schedule = () => {
         <WrapperBTN>
           <BTN
             id={item.day}
-            name={item.time}
-            kind_trainee={item.kind_trainee}
-            className={saturday}
+            data-name={item.time}
+            data-kind_trainee={item.kind_trainee}
+            data-date={saturday}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -469,9 +469,9 @@ const Schedule = () => {
         <WrapperBTN>
           <BTN
             id={item.day}
-            name={item.time}
-            kind_trainee={item.kind_trainee}
-            className={sunday}
+            data-name={item.time}
+            data-kind_trainee={item.kind_trainee}
+            data-date={sunday}
             onClick={Close}
           >
             {item.kind_trainee}

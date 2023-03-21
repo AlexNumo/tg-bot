@@ -22,7 +22,8 @@ const Dialog = styled.div`
   padding-left: 20px;
   border: 3px solid;
   border-radius: 12px;
-  background-color: #9cda9e;
+  margin-top: 25px;
+  background: linear-gradient(#c6e4ee 0%, #c6e4ee 40%, #fed1ae 60%, #faa0b9 70%, #cb7dcb 80%, #757ecb 100%);
 `;
 
 const KindStyle = styled.span`

@@ -183,7 +183,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
 
   // useEffect(()=>{
   //   const res = async () => { 
-  //     const find = await clientAPI.findDataUsers({id: '+380633576239'});
+  //     const find = await clientAPI.findDataUsers(findUserByID);
   //     return find;
   //     // return setFindUserByID(find);
   //   };
@@ -192,8 +192,10 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
 
   // const HandleFindNumber = (e) =>{
   //   console.log(e.target.value)
-  //   // const res = clientAPI.findDataUsers({id: '+380633576239'});
-  //   // setFindUserByID(res)
+  //   // const send = { id: '+380633576239' }
+  //   // const res = clientAPI.findDataUsers(send);
+  //   // console.log(res)
+  //   setFindUserByID(e.target.value)
   // }
 
   // console.log(findUserByID)
@@ -202,7 +204,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     <Wrapper>
       <Dialog>
         {kind_trainee ?
-        <>  
+        <>
           <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
           <h4>Будь ласка, введіть наступні дані</h4><br />
           {/* <input type="text" onChange={HandleFindNumber}/> */}

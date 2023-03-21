@@ -620,7 +620,7 @@ const Schedule = () => {
   }
 
   return (
-    <>
+    <div style={{overflow: 'auto'}}>
       <LogoPosition>
         <LogoStudio>Ars Fit Studio</LogoStudio>
         <LogoSandra>by Sandrochka_strong</LogoSandra>
@@ -636,7 +636,7 @@ const Schedule = () => {
         />
         :
         null}
-    </>
+    </div>
   )
 };
 

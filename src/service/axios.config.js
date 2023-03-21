@@ -60,8 +60,8 @@ export const deleteDataUsers = async ({id}) => {
 export const findDataUsers = async (id) => {
   console.log(id)
   try {
-    const result = await instance.get(`/tgbot/find`, id);
-    // console.log(result.data)
+    const result = await instance.put(`/tgbot/find`, id);
+    console.log(result.data)
     return result;
   } catch (error) {
     toast.error('Упс, щось пішло не так');

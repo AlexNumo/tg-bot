@@ -30,6 +30,7 @@ const BTN = styled.button`
   margin: 2px;
   padding: 2px;
   color: black;
+  background-color: #f4c2c2;
 `;
 
 const Days = styled.span`

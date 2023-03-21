@@ -6,7 +6,8 @@ function App() {
 
   return (
     <div>
-      <Schedule/>
+      <Schedule />
+      
     </div>
   );
 }

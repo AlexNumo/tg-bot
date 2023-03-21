@@ -39,7 +39,7 @@ export const getDataALL = async () => {
 
 export const sendDataUsers = async ({ id, day_translate, info }) => {
   try {
-    const res = await instance.post(`/tgbot`, { id, info });
+    const res = await instance.post(`/tgbot`, { id, info })
     ToastInfo({day_translate, info});
     return res;
   } catch (e) {
@@ -61,9 +61,9 @@ export const findDataUsers = async (id) => {
   // console.log(id)
   try {
     const result = await instance.put(`/tgbot/find`, id);
-    // console.log(result.data)
     return result.data;
   } catch (error) {
+    toast.error('Упс, щось пішло не так');
     console.error(error.message);
   }
 };

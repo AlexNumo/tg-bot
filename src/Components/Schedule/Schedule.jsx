@@ -620,7 +620,7 @@ const Schedule = () => {
   }
 
   return (
-    <div style={{overflow: 'auto'}}>
+    <div style={{overflow: 'auto', backgroundColor: '#f3d8d8'}}>
       <LogoPosition>
         <LogoStudio>Ars Fit Studio</LogoStudio>
         <LogoSandra>by Sandrochka_strong</LogoSandra>

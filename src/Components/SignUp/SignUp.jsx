@@ -1,12 +1,15 @@
 import { clientAPI } from '../../service/axios.config';
 import DayOfWeek from 'Components/DayOfWeek/DayOfWeek';
 import Input from 'react-phone-number-input/input';
+// import { GrClose } from "react-icons/gr";
+import { IoIosClose } from "react-icons/io";
 import { ToastContainer } from 'react-toastify';
 import {
   Wrapper,
   Dialog,
   KindStyle,
   SubBTN,
+  InputStyle,
 } from './SignUp.styled';
 import { useEffect, useState } from 'react';
 import * as yup from 'yup';
@@ -174,17 +177,18 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     e.preventDefault();
     if (validForm === true) {
       const { id, day_translate, info } = onSubmit;
-      clientAPI.sendDataUsers({ id, day_translate, info }).then(setValidForm(false));
+      clientAPI.sendDataUsers({ id, day_translate, info });
       clientAPI.sendTgRecord({id, day_translate, clientName, kind_trainee, time, date, instaNickName});
       // new Promise(resolve => setTimeout(resolve, 500));
-      // alert(JSON.stringify(onSubmit, null, 2));
+      // alert(JSON.stringify(onSubmit, null, 2)).then(Close);
       return;
     }
     return;
   };
 
   useEffect(() => {
-    const findingTel = {id: tel}
+    const findingTel = { id: tel }
+    // console.log(findingTel)
     const res = async () => { 
       const find = await clientAPI.findDataUsers(findingTel);
       return setFindUserByID(find);
@@ -195,6 +199,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   return (
     <Wrapper>
       <Dialog>
+        <IoIosClose style={{ position: 'absolute', marginLeft: '195px', marginTop: '-26px', color: '#7a7272' }} size={30} onClick={Close} />
         {kind_trainee ?
         <>
           <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
@@ -211,6 +216,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                 country="UA"
                 international
                 withCountryCallingCode
+                style={{backgroundColor: 'inherit', borderRadius: '22px', width: '200px', boxShadow: '2px 2px 5px rgba(66,66,66,.75)'}}
             /><br />
               {currentErrorTel ?
                 <div style={{ color: "red", width: "180px" }}>
@@ -222,7 +228,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                 <>
                   <label htmlFor="name">
                     Прізвище та ім'я:</label><br />
-                    <input
+                    <InputStyle
                       name="name"
                       type="text"
                       // onChange={e =>{setClientName(e.target.value)}}
@@ -238,7 +244,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                       </div>
                     <label htmlFor="nick-name">
                       Nickname on Instagram:</label><br />
-                      <input
+                      <InputStyle
                         name="nick-name"
                         type="text"
                         // onChange={e => { setInstaNickName(e.target.value) }}
@@ -254,10 +260,10 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                       }
                     </div>
                   </>}
-              <SubBTN type="button" onClick={Close}>
+              {/* <SubBTN type="button" onClick={() =>{clientAPI.findDataUsers({id: '+380633576239'})}}>
                 Закрити
-              </SubBTN>
-              <SubBTN type="submit" onClick={HandleSubmit} disabled={!validForm}>
+              </SubBTN> */}
+              <SubBTN type="submit" onClick={HandleSubmit} disabled={!validForm} className={validForm ? 'active' : ''}>
                 Записатися
             </SubBTN>
             </form>
@@ -265,9 +271,11 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           :
           <>
             <p>Ви обрали час на який не заплановано заняття. Будь ласка, оберіть інший час</p>
-            <SubBTN type="button" onClick={Close}>
+            {/* <IoIosClose style={{ position: 'absolute', marginLeft: '195px', marginTop: '-26px', color: '#7a7272' }} size={30} onClick={Close} /> */}
+
+            {/* <SubBTN type="button" onClick={Close}>
               Закрити
-            </SubBTN>
+            </SubBTN> */}
           </>}
         
       </Dialog>

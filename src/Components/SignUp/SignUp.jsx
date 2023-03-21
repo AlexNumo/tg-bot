@@ -203,7 +203,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         {kind_trainee ?
         <>
           <h4>Ви обрали <KindStyle>{kind_trainee} об <DayOfWeek day={day} time={time} /></KindStyle></h4><br />
-          <h4>Будь ласка, введіть наступні дані</h4><br />
+          <h4>Будь ласка, введіть наступні дані: </h4><br />
           {/* <input type="text" onChange={HandleFindNumber}/> */}
           <form>
             <label htmlFor="id">
@@ -270,7 +270,8 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
           </>
           :
           <>
-            <p>Ви обрали час на який не заплановано заняття. Будь ласка, оберіть інший час</p>
+            <p>Ви обрали час, на який не заплановано заняття.</p>
+            <p>Будь ласка, оберіть інший час.</p>
             {/* <IoIosClose style={{ position: 'absolute', marginLeft: '195px', marginTop: '-26px', color: '#7a7272' }} size={30} onClick={Close} /> */}
 
             {/* <SubBTN type="button" onClick={Close}>

@@ -78,16 +78,27 @@ export const getDataALLUsers = async () => {
   }
 };
 
-const sendTgRecord = async ({id, day_translate, clientName, kind_trainee, time, date, instaNickName}) => {
+const sendTgRecord = async ({id, clientName, kind_trainee, time, date, instaNickName}) => {
   // 163995726 - sandra
   // 525427019 - alexnumo
   // 163995726&text=
   try {
+    const dateNew = new Date(date);
+    const weekdays = ['неділю', 'понеділок', 'вівторок', 'середу', 'четвер', 'п\'ятницю', 'суботу'];
+    const months = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
+    const dayOfWeek = weekdays[dateNew.getDay()];
+    const dayOfMonth = dateNew.getDate();
+    const month = months[dateNew.getMonth()];
+    const newDateRender = `у ${dayOfWeek} ${dayOfMonth} ${month}`;
+    instaNickName.substring(1);
+    const urlInsta = `https://www.instagram.com/${instaNickName.substring(1)}/`
+    // console.log(`Записався клієнт ${clientName} на тренування ${kind_trainee} ${newDateRender} о ${time}. Номер телефону клієнта ${id}, Instagram: ${urlInsta}`)
+
     // const instaNickNameConvertation =
     // instaNickName.substring(1);
-    const urlInsta = `https://www.instagram.com/${instaNickName.substring(1)}/`
+    // const urlInsta = `https://www.instagram.com/${instaNickName.substring(1)}/`
     // https://www.instagram.com/koksik839/
-    const res = await tgSandra.post(`Записався клієнт ${clientName} на тренування ${kind_trainee} в ${day_translate} о ${time}. Номер телефону клієнта ${id}, дата тренування: ${date}, Instagram: ${urlInsta}`,);
+    const res = await tgSandra.post(`Записався клієнт ${clientName} на тренування ${kind_trainee} ${newDateRender} о ${time}. Номер телефону клієнта ${id}, Instagram: ${urlInsta}`,);
     return res;
   } catch (e) {
       toast.error('Щось пішло не так');

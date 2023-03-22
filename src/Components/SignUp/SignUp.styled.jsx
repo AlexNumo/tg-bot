@@ -2,7 +2,7 @@ import styled, {
   // keyframes
 } from 'styled-components';
 
-// const myAnim = keyframes`
+// const myAnim = `
 // 	0% {
 // 		transform: scale(2);
 // 	}
@@ -19,6 +19,7 @@ const Wrapper = styled.div`
   left: 0;
   top: 0;
   background-color: rgba(194, 209, 99, 0.5);
+  backdrop-filter: blur(2px)
 `;
 
 const Dialog = styled.div`
@@ -35,7 +36,7 @@ const Dialog = styled.div`
   border: 3px solid;
   border-radius: 12px;
   margin-top: 25px;
-  background: #f4c2c2;
+  background: rgb(246, 205, 205);
   /* animation: {myAnim} 0.5s ease 0s 1 normal forwards; */
 `;
 
@@ -81,6 +82,7 @@ const InputStyle = styled.input`
   border-radius: 22px;
   width: 200px;
   box-shadow: 2px 2px 5px rgba(66,66,66,.75);
+  padding-left: 10px;
   /* margin-right: 20px; */
 `;
 

@@ -1,7 +1,6 @@
 import { clientAPI } from '../../service/axios.config';
 import DayOfWeek from 'Components/DayOfWeek/DayOfWeek';
 import Input from 'react-phone-number-input/input';
-// import { GrClose } from "react-icons/gr";
 import { IoIosClose } from "react-icons/io";
 import { ToastContainer } from 'react-toastify';
 import {
@@ -69,6 +68,12 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   }, [day]);
   // console.log(findUserByID)
   useEffect(() => {
+    if (instaNickName === '') {
+      setInstaNickName(instaNickName ? ("@" + instaNickName) : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].instaNickName : ''));
+    }
+    if (clientName === '') {
+      setClientName(clientName ? clientName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].name : ''));
+    }
     setOnSubmit({
       id: tel,
       day_translate: dayTranslate,
@@ -77,12 +82,11 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         day: day,
         time: time,
         kind_trainee: kind_trainee,
-        name: clientName ? clientName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].name : ''),
-        instaNickName: instaNickName ? instaNickName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].instaNickName : ''),
+        name: clientName,
+        instaNickName: instaNickName,
       }
     })
   }, [clientName, date, day, dayTranslate, kind_trainee, time, tel, instaNickName, findUserByID]);
-
   useEffect(() => {
     if (validFormName === true & validFormTel === true & validFormInsta === true) {
       return (setValidForm(true));
@@ -92,6 +96,19 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     }
     return (setValidForm(false));
   }, [validFormName, validFormTel, validFormInsta, findUserByID]);
+
+  useEffect(() => {
+    const findingTel = { id: tel }
+    // console.log(findingTel)
+    const res = async () => {
+      if (tel.length === 13) {
+        const find = await clientAPI.findDataUsers(findingTel);
+        return setFindUserByID(find);
+      }
+      return null;
+    };
+    res();
+  },[tel])
 
   // console.log(kind_trainee)
 
@@ -178,23 +195,13 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     if (validForm === true) {
       const { id, day_translate, info } = onSubmit;
       clientAPI.sendDataUsers({ id, day_translate, info });
-      clientAPI.sendTgRecord({id, day_translate, clientName, kind_trainee, time, date, instaNickName});
+      clientAPI.sendTgRecord({id, clientName, kind_trainee, time, date, instaNickName});
       // new Promise(resolve => setTimeout(resolve, 500));
       // alert(JSON.stringify(onSubmit, null, 2)).then(Close);
       return;
     }
     return;
   };
-
-  useEffect(() => {
-    const findingTel = { id: tel }
-    // console.log(findingTel)
-    const res = async () => { 
-      const find = await clientAPI.findDataUsers(findingTel);
-      return setFindUserByID(find);
-    };
-    res();
-  },[tel])
 
   return (
     <Wrapper>
@@ -216,11 +223,12 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                 country="UA"
                 international
                 withCountryCallingCode
-                style={{backgroundColor: 'inherit', borderRadius: '22px', width: '200px', boxShadow: '2px 2px 5px rgba(66,66,66,.75)'}}
-            /><br />
+                // placeholder='5898556'
+                style={{backgroundColor: 'inherit', borderRadius: '22px', width: '200px', boxShadow: '2px 2px 5px rgba(66,66,66,.75)', paddingLeft: '10px'}}
+            /><br/>
               {currentErrorTel ?
                 <div style={{ color: "red", width: "180px" }}>
-                  <p style={{ fontSize: "14px" }}>{currentErrorTel}</p>
+                  <p style={{ fontSize: "14px"}}>{currentErrorTel}</p>
                 </div> :
                 null
               }
@@ -233,6 +241,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                       type="text"
                       // onChange={e =>{setClientName(e.target.value)}}
                       onChange={validateUserName}
+                      placeholder='Sandrochka Strong'
                   /><br />
                     <div>
                       {currentErrorName ?
@@ -250,6 +259,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                         // onChange={e => { setInstaNickName(e.target.value) }}
                         value={instaNickName}
                         onChange={validateUserInsta}
+                        placeholder='arsfit_studio'
                     /><br />
                     <div>
                       {currentErrorInsta ?
@@ -278,7 +288,6 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
               Закрити
             </SubBTN> */}
           </>}
-        
       </Dialog>
       <div>
         <ToastContainer

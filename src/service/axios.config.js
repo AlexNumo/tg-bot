@@ -43,6 +43,7 @@ export const sendDataUsers = async ({ id, day_translate, info }) => {
     ToastInfo({day_translate, info});
     return res;
   } catch (e) {
+    console.log(e)
       toast.error('Щось пішло не так');
   }
 };

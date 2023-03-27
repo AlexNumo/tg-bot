@@ -14,6 +14,7 @@ const tgSandra = axios.create({
   // 163995726 - sandra
   // 525427019 - alexnumo
   baseURL: 'https://api.telegram.org/bot6096389512:AAGJpKndAcXG8jCZ1bqSXpEVNJSrcHkwv3I/sendMessage?chat_id=163995726&text=',
+  // baseURL: 'https://api.telegram.org/bot6096389512:AAGJpKndAcXG8jCZ1bqSXpEVNJSrcHkwv3I/sendMessage?chat_id=525427019&text=',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -270,6 +270,7 @@ const Schedule = () => {
   },
    [setData0800]
   );
+  
   useEffect(() => {
     const DateToday = () => {
       const dateClickOnBTN = moment().format('dddd');

@@ -21,6 +21,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
   const [currentErrorTel, setCurrentErrorTel] = useState('');
   const [currentErrorInsta, setCurrentErrorInsta] = useState('');
   const [instaNickName, setInstaNickName] = useState('');
+  const [waitingResponse, setWaitingResponse] = useState(true);
   const [validForm, setValidForm] = useState(false);
   const [validFormName, setValidFormName] = useState(false);
   const [validFormTel, setValidFormTel] = useState(false);
@@ -66,14 +67,12 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
     };
     DayOfWeekTranslate();
   }, [day]);
-  // console.log(findUserByID)
+  
+  // if (findUserByID) {
+  //   console.log(findUserByID.info[findUserByID.info.length - 1].instaNickName)
+  // }
+  
   useEffect(() => {
-    if (instaNickName === '') {
-      setInstaNickName(instaNickName ? ("@" + instaNickName) : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].instaNickName : ''));
-    }
-    if (clientName === '') {
-      setClientName(clientName ? clientName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].name : ''));
-    }
     setOnSubmit({
       id: tel,
       day_translate: dayTranslate,
@@ -87,108 +86,101 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
       }
     })
   }, [clientName, date, day, dayTranslate, kind_trainee, time, tel, instaNickName, findUserByID]);
-  useEffect(() => {
-    if (validFormName === true & validFormTel === true & validFormInsta === true) {
-      return (setValidForm(true));
-    }
-    if (findUserByID) {
-      return (setValidForm(true));
-    }
-    return (setValidForm(false));
-  }, [validFormName, validFormTel, validFormInsta, findUserByID]);
 
   useEffect(() => {
     const findingTel = { id: tel }
-    // console.log(findingTel)
     const res = async () => {
-      if (tel.length === 13) {
-        const find = await clientAPI.findDataUsers(findingTel);
-        return setFindUserByID(find);
-      }
+      if (tel.length === 13 && waitingResponse) {
+        const find =
+        await clientAPI.findDataUsers(findingTel);
+        setWaitingResponse(false);
+        setFindUserByID(find)
+        return null;
+      };
+      if (findUserByID) {
+        setClientName(clientName ? clientName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].name : ''));
+        setInstaNickName(findUserByID ? findUserByID.info[findUserByID.info.length - 1].instaNickName : '')
+        }
       return null;
     };
     res();
-  },[tel])
+  },[tel, clientName, instaNickName, findUserByID, waitingResponse])
 
-  // console.log(kind_trainee)
 
-  const userName = yup.object({
-    name: yup.string()
-      .min(3, "Ім'я може містити мінімум 3 символи")
-      .max(25, "Ім'я може містити максимум 25 символів")
-      .required("Ім'я обов'язкове до заповнення"),
-  });
+  useEffect(() => {
+    const userName = yup.object({
+        name: yup.string()
+          .min(3, "Ім'я може містити мінімум 3 символи")
+          .max(25, "Ім'я може містити максимум 25 символів")
+          .required("Ім'я обов'язкове до заповнення")
+      });
 
-  const userTel = yup.object({
-    id: yup.string()
-      .min(13, "Номер телефону має містити 13 символів")
-      .max(13, "Номер телефону має містити 13 символів")
-      .required("Номер телефону обов'язковий до заповнення"),
-  });
+    const userTel = yup.object({
+      id: yup.string()
+        .min(13, "Номер телефону має містити 13 символів")
+        .max(13, "Номер телефону має містити 13 символів")
+        .required("Номер телефону обов'язковий до заповнення")
+      });
 
     const userInsta = yup.object({
     instaNickName: yup.string()
       .min(3, "Nickname може містити мінімум 3 символи")
       .max(25, "Nickname може містити максимум 25 символів")
-      .required("Nickname обов'язкове до заповнення"),
-  });
-
-  const validateUserName = (e) => {
-    const name = e.target.value;
-    setClientName(name);
-    userName.validate({ name: name })
-      .catch((err) => {
-        setCurrentErrorName(err.errors);
-        setValidFormName(false);
+      .required("Nickname обов'язкове до заповнення")
       });
-    userName.isValid({ name: name })
-      .then(function (valid) {
-        if (valid === true) {
-          setCurrentErrorName('');
-          setValidFormName(true);
-          return;
-        }
-      })
-  };
 
-  const ValidateUserID = (e) => {
-    const userID = e;
-    setTel(e);
-    userTel.validate({ id: userID })
-      .catch((err) => {
-        setCurrentErrorTel(err.errors);
-        setValidFormTel(false);
-      });
-    userTel.isValid({ id: userID })
-      .then(function (valid) {
-        if (valid === true) {
-          setCurrentErrorTel('');
-          setValidFormTel(true);
-          return;
-        }
-      })
-  };
-
-  const validateUserInsta = (e) => {
-    const nickname = e.target.value;
-    // console.log(nickname)
-    setInstaNickName(nickname)
-    userInsta.validate({ instaNickName: nickname })
-      .catch((err) => {
-        // console.log(instaNickName);
-        setCurrentErrorInsta(err.errors);
-        setValidFormInsta(false);
-      });
-    userInsta.isValid({ instaNickName: nickname })
-      .then(function (valid) {
-        // console.log(instaNickName)
-        if (valid === true) {
-          setCurrentErrorInsta('');
-          setValidFormInsta(true);
-          return;
-        }
-      })
-  };
+    const name = clientName;
+    const userID = tel;
+    const nickname = instaNickName;
+    if (name) {
+      userName.validate({ name: name })
+        .catch((err) => {
+          setCurrentErrorName(err.errors);
+          setValidFormName(false);
+        });
+      userName.isValid({ name: name })
+        .then(function (valid) {
+          if (valid === true) {
+            setCurrentErrorName('');
+            setValidFormName(true);
+            return;
+          }
+        })
+    }
+    if (userID) {
+      userTel.validate({ id: userID })
+        .catch((err) => {
+          setCurrentErrorTel(err.errors);
+          setValidFormTel(false);
+        });
+      userTel.isValid({ id: userID })
+        .then(function (valid) {
+          if (valid === true) {
+            setCurrentErrorTel('');
+            setValidFormTel(true);
+            return;
+          }
+        })
+    }
+    if (nickname) {
+      userInsta.validate({ instaNickName: nickname })
+        .catch((err) => {
+          setCurrentErrorInsta(err.errors);
+          setValidFormInsta(false);
+        });
+      userInsta.isValid({ instaNickName: nickname })
+        .then(function (valid) {
+          if (valid === true) {
+            setCurrentErrorInsta('');
+            setValidFormInsta(true);
+            return;
+          }
+        })
+    }
+    if (validFormName === true & validFormTel === true & validFormInsta === true) {
+      return (setValidForm(true));
+    }
+}, [clientName, tel, instaNickName, validFormName, validFormTel, validFormInsta]);
   
   const HandleSubmit = (e) => {
     e.preventDefault();
@@ -219,7 +211,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                 name="id"
                 id="id"
                 value={tel}
-                onChange={ValidateUserID}
+                onChange={e => setTel(e)}
                 country="UA"
                 international
                 withCountryCallingCode
@@ -240,7 +232,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                       name="name"
                       type="text"
                       // onChange={e =>{setClientName(e.target.value)}}
-                      onChange={validateUserName}
+                      onChange={e => setClientName(e.target.value)}
                       placeholder='Sandrochka Strong'
                   /><br />
                     <div>
@@ -258,10 +250,10 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
                         type="text"
                         // onChange={e => { setInstaNickName(e.target.value) }}
                         value={instaNickName}
-                        onChange={validateUserInsta}
+                        onChange={e => setInstaNickName(e.target.value)}
                         placeholder='arsfit_studio'
                     /><br />
-                    <div>
+                  <div>
                       {currentErrorInsta ?
                         <div style={{ color: "red", width: "180px" }}>
                           <p style={{ fontSize: "14px" }}>{currentErrorInsta}</p>

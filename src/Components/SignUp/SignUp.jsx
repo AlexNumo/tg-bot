@@ -13,7 +13,7 @@ import {
 import { useEffect, useState } from 'react';
 import * as yup from 'yup';
 
-const SignUp = ({ Close, kind_trainee, day, time, date }) => {
+const SignUp = ({ Close, kind_trainee, day, time, date, nameCoach }) => {
   const [dayTranslate, setDayTranslate] = useState('');
   const [tel, setTel] = useState('');
   const [clientName, setClientName] = useState('');
@@ -36,7 +36,8 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
       time: "",
       kind_trainee: "",
       name: "",
-      instaNickName: ""
+      instaNickName: "",
+      coach: ""
     }
   })
 
@@ -83,16 +84,17 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
         kind_trainee: kind_trainee,
         name: clientName,
         instaNickName: instaNickName,
+        coach: nameCoach
       }
     })
-  }, [clientName, date, day, dayTranslate, kind_trainee, time, tel, instaNickName, findUserByID]);
+  }, [clientName, date, day, dayTranslate, kind_trainee, time, tel, instaNickName, findUserByID, nameCoach]);
 
   useEffect(() => {
     const findingTel = { id: tel }
     const res = async () => {
       if (tel.length === 13 && waitingResponse) {
         const find =
-        await clientAPI.findDataUsers(findingTel);
+          await clientAPI.findDataUsers(findingTel);
         setWaitingResponse(false);
         setFindUserByID(find)
         return null;
@@ -100,12 +102,11 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
       if (findUserByID) {
         setClientName(clientName ? clientName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].name : ''));
         setInstaNickName(findUserByID ? findUserByID.info[findUserByID.info.length - 1].instaNickName : '')
-        }
+      }
       return null;
     };
     res();
-  },[tel, clientName, instaNickName, findUserByID, waitingResponse])
-
+  }, [tel, clientName, instaNickName, findUserByID, waitingResponse]);
 
   useEffect(() => {
     const userName = yup.object({
@@ -189,7 +190,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date }) => {
       clientAPI.sendDataUsers({ id, day_translate, info });
       clientAPI.sendTgRecord({id, clientName, kind_trainee, time, date, instaNickName});
       // new Promise(resolve => setTimeout(resolve, 500));
-      // alert(JSON.stringify(onSubmit, null, 2)).then(Close);
+      // alert(JSON.stringify(onSubmit, null, 2));
       return;
     }
     return;

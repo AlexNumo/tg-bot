@@ -32,6 +32,7 @@ const Schedule = () => {
   const [day, setDay] = useState('');
   const [time, setTime] = useState('');
   const [dateClickOnBTN, setDateClickOnBTN] = useState('');
+  const [nameCoach, setNameCoach] = useState('');
   const [sunday, setSunday] = useState('');
   const [monday, setMonday] = useState('');
   const [tuesday, setTuesday] = useState('');
@@ -355,7 +356,8 @@ const Schedule = () => {
         setKind_trainee(''),
         setDay(''),
         setTime(''),
-        setDateClickOnBTN('')
+        setDateClickOnBTN(''),
+        setNameCoach('')
       ];
     }
     if (e.target.outerText === "-") {
@@ -365,6 +367,7 @@ const Schedule = () => {
       setDay(''),
       setTime(''),
       setDateClickOnBTN(''),
+      setNameCoach('')
       ]
     }
     setModalOpen(true);
@@ -372,9 +375,13 @@ const Schedule = () => {
     setDay(e.target.id);
     setTime(e.target.dataset.name);
     setDateClickOnBTN(e.target.dataset.date);
+    setNameCoach(e.target.dataset.coach);
   };
 
+  // console.log("nameCoach: ", nameCoach)
+
   const ChooseBTN = ({ item }) => {
+    // console.log(item.name_Coach)
     if (item.day === "monday") {
       return (
         <WrapperBTN>
@@ -383,6 +390,7 @@ const Schedule = () => {
             data-name={item.time}
             data-kind_trainee={item.kind_trainee}
             data-date={monday}
+            data-coach={item.name_Coach}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -398,6 +406,7 @@ const Schedule = () => {
             data-name={item.time}
             data-kind_trainee={item.kind_trainee}
             data-date={tuesday}
+            data-coach={item.name_Coach}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -413,6 +422,7 @@ const Schedule = () => {
             data-name={item.time}
             data-kind_trainee={item.kind_trainee}
             data-date={wednesday}
+            data-coach={item.name_Coach}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -428,6 +438,7 @@ const Schedule = () => {
             data-name={item.time}
             data-kind_trainee={item.kind_trainee}
             data-date={thursday}
+            data-coach={item.name_Coach}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -443,6 +454,7 @@ const Schedule = () => {
             data-name={item.time}
             data-kind_trainee={item.kind_trainee}
             data-date={friday}
+            data-coach={item.name_Coach}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -458,6 +470,7 @@ const Schedule = () => {
             data-name={item.time}
             data-kind_trainee={item.kind_trainee}
             data-date={saturday}
+            data-coach={item.name_Coach}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -473,6 +486,7 @@ const Schedule = () => {
             data-name={item.time}
             data-kind_trainee={item.kind_trainee}
             data-date={sunday}
+            data-coach={item.name_Coach}
             onClick={Close}
           >
             {item.kind_trainee}
@@ -634,6 +648,7 @@ const Schedule = () => {
           day={day}
           time={time}
           date={dateClickOnBTN}
+          nameCoach={nameCoach}
         />
         :
         null}

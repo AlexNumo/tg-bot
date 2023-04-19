@@ -18,4 +18,23 @@ const ToastInfo = ({ day_translate, info }) => {
     )
 };
 
-export default ToastInfo;
+const ToastInfoDublicateTrainings = () => {
+  return (
+    toast.error(`Вибачте, вле Ви намагаєтеся повторно записатися на тренування, на яке вже записані`, {
+      position: "top-left",
+      autoClose: false,
+      width: "100px",
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 1,
+      theme: "dark",
+      })
+    )
+};
+
+export {
+  ToastInfo,
+  ToastInfoDublicateTrainings
+};

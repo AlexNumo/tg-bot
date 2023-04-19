@@ -4,7 +4,7 @@ import {
 } from './api';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ToastInfo from 'Components/ToastInfo/ToastInfo';
+import {ToastInfo, ToastInfoDublicateTrainings} from 'Components/ToastInfo/ToastInfo';
 
 
 export const sendData = async ({ id, day, time, kind_trainee, name_Coach }) => {
@@ -39,8 +39,24 @@ export const getDataALL = async () => {
 
 export const sendDataUsers = async ({ id, day_translate, info }) => {
   try {
-    const res = await instance.post(`/tgbot`, { id, info })
-    ToastInfo({day_translate, info});
+    const res = await instance.post(`/tgbot`, { id, info });
+    if (res.data.message === "User already has this info") {
+      return ToastInfoDublicateTrainings();
+      // console.log("GOOD")
+    }
+    ToastInfo({ day_translate, info });
+    // console.log("res: ", res);
+    return res;
+  } catch (e) {
+    console.log(e)
+      toast.error('Щось пішло не так');
+  }
+};
+
+export const upgradeDataUsers = async ({ id, info }) => {
+  try {
+    // console.log(id, info)
+    const res = await instance.put(`/tgbot/upgradeUsers`, { id, info })
     return res;
   } catch (e) {
     console.log(e)
@@ -111,8 +127,9 @@ export const clientAPI = {
   getData,
   getDataALL,
   sendDataUsers,
+  upgradeDataUsers,
   deleteDataUsers,
   getDataALLUsers,
   sendTgRecord,
-  findDataUsers
+  findDataUsers,
 };

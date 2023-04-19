@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   left: 0;
   top: 0;
   background-color: rgba(194, 209, 99, 0.5);
-  backdrop-filter: blur(2px)
+  backdrop-filter: blur(2px);
 `;
 
 const Dialog = styled.div`

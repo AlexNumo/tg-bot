@@ -261,8 +261,8 @@ const SignUp = ({ Close, kind_trainee, day, time, date, nameCoach }) => {
       const { id, day_translate, info } = onSubmit;
       try {
         await clientAPI.sendDataUsers({ id, day_translate, info }).then(setLoading(false));
-        // await clientAPI.sendTgRecord({ id, clientName, kind_trainee, time, date, instaNickName });
-        // await clientAPI.upgradeDataUsers({ id, info });
+        await clientAPI.sendTgRecord({ id, clientName, kind_trainee, time, date, instaNickName });
+        await clientAPI.upgradeDataUsers({ id, info });
         // alert(JSON.stringify(onSubmit, null, 2));
       } catch (error) {
         console.error(error);

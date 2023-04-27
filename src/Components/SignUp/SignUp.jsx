@@ -150,7 +150,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date, nameCoach }) => {
     }, [tel, waitingResponse]);
   
   useEffect(() => {
-    if (findUserByID) {
+    if (findUserByID && findUserByID.info.length > 0) {
       setClientName(clientName ? clientName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].name : ''));
       setInstaNickName(instaNickName ? instaNickName : (findUserByID ? findUserByID.info[findUserByID.info.length - 1].instaNickName : ''));
     }
@@ -322,7 +322,7 @@ const SignUp = ({ Close, kind_trainee, day, time, date, nameCoach }) => {
                 </div> :
                 null
               }
-              {findUserByID ? null :
+              {findUserByID && findUserByID.info.length > 0 ? null :
                 <>
                   <label htmlFor="name">
                     Прізвище та ім'я:</label><br />

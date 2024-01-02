@@ -38,13 +38,22 @@ export const getDataALL = async () => {
 };
 
 export const sendDataUsers = async ({ id, day_translate, info }) => {
+  const name = info.name;
+  const kind_trainee = info.kind_trainee;
+  const time = info.time
+  const firstWordOfCoach = info.coach.split(' ')[0];
+  const coachName = (firstWordOfCoach === 'Сирота') ? 'Анастасія' : firstWordOfCoach;
+  const finalCoachName = (coachName === 'Алина') ? 'Аліна' : coachName;
+  console.log(finalCoachName)
+  
   try {
     const res = await instance.post(`/tgbot`, { id, info });
+    // console.log("info: ", info)
     if (res.data.message === "User already has this info") {
       return ToastInfoDublicateTrainings();
       // console.log("GOOD")
     }
-    ToastInfo({ day_translate, info });
+    ToastInfo({ day_translate, name, kind_trainee, time, finalCoachName });
     // console.log("res: ", res);
     return res;
   } catch (e) {
